@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navnit Maurya — Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Cinzel:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      background-color: #000000;
+      color: #ffffff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* FULLSCREEN CANVAS SCROLL ANIMATION & BACKGROUND IMAGE FALLBACK */
+    .canvas-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 2;
+      pointer-events: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #000000 url('ezgif-frame-001.jpg') center center / cover no-repeat;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Subtle Vignette for Text Legibility */
+    .canvas-vignette {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.4) 75%, rgba(0, 0, 0, 0.85) 100%);
+      pointer-events: none;
+    }
+
+    /* BACKGROUND WATERMARK TITLE (BEHIND PERSON'S FACE) */
+    .bg-portfolio-watermark {
+      position: fixed;
+      top: 10vh;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      text-align: center;
+      font-family: 'Cinzel', serif;
+      font-size: clamp(3.5rem, 15vw, 17rem);
+      font-weight: 900;
+      line-height: 0.8;
+      color: transparent;
+      -webkit-text-stroke: 1.5px rgba(229, 193, 88, 0.35);
+      letter-spacing: 0.02em;
+      user-select: none;
+      z-index: 1;
+      pointer-events: none;
+      text-shadow: 0 0 30px rgba(229, 193, 88, 0.2);
+    }
+
+    /* OVERLAID CONTENT WRAPPER */
+    .content-wrapper {
+      position: relative;
+      z-index: 10;
+    }
+
+    /* HEADER - FULLY TRANSPARENT AND DISAPPEARS UPWARDS ON SCROLL WITH ANIMATION */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 48px;
+      z-index: 100;
+      background: transparent;
+      backdrop-filter: none;
+      border: none;
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s ease;
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    header.scrolled-out {
+      transform: translateY(-120%);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .brand-logo {
+      font-family: 'Cinzel', serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: #e5c158;
+      letter-spacing: 0.1em;
+    }
+
+    .brand-sub {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: rgba(255, 255, 255, 0.85);
+      text-transform: uppercase;
+    }
+
+    .year-tag {
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      color: #e5c158;
+      font-weight: 700;
+    }
+
+    /* HERO SECTION */
+    .hero-section {
+      min-height: 170vh;
+      padding: 130px 48px 60px 48px;
+      position: relative;
+    }
+
+    .hero-text-grid {
+      position: sticky;
+      top: 200px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      z-index: 15;
+    }
+
+    .hero-left {
+      max-width: 440px;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95);
+    }
+
+    .hero-tag {
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      color: #e5c158;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .hero-name-huge {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.2rem, 4.4vw, 4.2rem);
+      font-weight: 900;
+      line-height: 1;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+      text-shadow: 0 0 30px rgba(0,0,0,0.9), 0 0 15px rgba(229, 193, 88, 0.3);
+    }
+
+    .hero-name-huge span {
+      color: #e5c158;
+    }
+
+    .hero-bio {
+      font-size: 0.96rem;
+      line-height: 1.65;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 20px;
+    }
+
+    .hero-sig {
+      font-family: 'Caveat', cursive;
+      font-size: 2.8rem;
+      color: #e5c158;
+      line-height: 1;
+      text-shadow: 0 0 15px rgba(229, 193, 88, 0.4);
+    }
+
+    .hero-right {
+      text-align: right;
+      max-width: 340px;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95);
+    }
+
+    .hero-motto {
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      line-height: 1.5;
+      color: #ffffff;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .location-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #e5c158;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* SECTIONS */
+    .section-block {
+      padding: 90px 48px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      position: relative;
+      z-index: 20;
+    }
+
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      color: #e5c158;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.9);
+    }
+
+    .section-title::before {
+      content: '✦';
+      color: #ffffff;
+    }
+
+    /* TABLE OF CONTENTS */
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .toc-item {
+      padding: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-decoration: none;
+      color: #ffffff;
+      transition: border-color 0.3s;
+    }
+
+    .toc-item:hover {
+      border-color: #e5c158;
+    }
+
+    .toc-num {
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      color: #e5c158;
+      font-weight: 800;
+    }
+
+    .toc-text {
+      font-size: 0.88rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* SKILLS & SERVICES GRID */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 36px;
+    }
+
+    .skill-card {
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .skill-card-num {
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
+      color: #e5c158;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .skill-card-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .skill-card-desc {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.6;
+    }
+
+    /* EDUCATION BOX */
+    .edu-box {
+      margin-top: 20px;
+      padding: 28px;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(229, 193, 88, 0.35);
+      border-radius: 10px;
+      backdrop-filter: blur(12px);
+    }
+
+    .edu-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #e5c158;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .edu-desc {
+      font-size: 0.92rem;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
+    /* FOOTER & WORKING EXACT SOCIAL LINKS */
+    .footer-section {
+      padding: 90px 48px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      position: relative;
+      z-index: 20;
+    }
+
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .footer-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+      font-weight: 800;
+      color: #e5c158;
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+
+    .social-bar {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .social-link {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(229, 193, 88, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+
+    .social-link:hover {
+      background: #e5c158;
+      color: #000000;
+      transform: translateY(-4px);
+      box-shadow: 0 0 20px rgba(229, 193, 88, 0.6);
+    }
+
+    .social-icon {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+    }
+
+    /* TOAST NOTIFICATION */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: rgba(20, 20, 25, 0.95);
+      border: 1px solid #e5c158;
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      z-index: 9999;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero-text-grid { flex-direction: column; gap: 30px; }
+      .toc-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .footer-grid { flex-direction: column; align-items: flex-start; }
+      header { padding: 16px 24px; }
+      .hero-section, .section-block, .footer-section { padding: 60px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BACKGROUND WATERMARK TITLE (BEHIND PERSON'S FACE) -->
+  <div class="bg-portfolio-watermark">PORTFOLIO</div>
+
+  <!-- FULLSCREEN ZOOMED CANVAS SCROLL ANIMATION & BACKGROUND IMAGE FALLBACK -->
+  <div class="canvas-container">
+    <canvas id="canvas"></canvas>
+    <div class="canvas-vignette"></div>
+  </div>
+
+  <!-- OVERLAID PORTFOLIO CONTENT -->
+  <div class="content-wrapper">
+
+    <!-- HEADER NAVIGATION (SMOOTHLY FADES OUT AND SLIDES UP ON SCROLL) -->
+    <header id="header">
+      <div>
+        <div class="brand-logo">NM</div>
+        <div class="brand-sub">Digital Creator & Tech Explorer</div>
+      </div>
+      <div class="year-tag">2026</div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+      <div class="hero-text-grid">
+        <div class="hero-left">
+          <div class="hero-tag">BCA 2nd Year • VBSPU</div>
+          <h1 class="hero-name-huge">Navnit <span>Maurya</span></h1>
+          <p class="hero-bio">
+            Passionate about Photo Editing, Video Editing, AI Training & Prompt Engineering, AI Website Development, Content Creation, and Cybersecurity Bug Hunting.
+          </p>
+          <div class="hero-sig">Navnit Maurya</div>
+        </div>
+
+        <div class="hero-right">
+          <div class="hero-motto">
+            Editing • AI Training • Bug Hunting • Web Creation
+          </div>
+          <div class="location-tag">
+            📍 VBSPU University, India
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TABLE OF CONTENTS -->
+    <section class="section-block">
+      <div class="section-title">Table of Contents</div>
+
+      <div class="toc-grid">
+        <a href="#about" class="toc-item">
+          <span class="toc-num">01</span>
+          <span class="toc-text">About & Education</span>
+        </a>
+        <a href="#skills" class="toc-item">
+          <span class="toc-num">02</span>
+          <span class="toc-text">Skills & Expertise</span>
+        </a>
+        <a href="#contact" class="toc-item">
+          <span class="toc-num">03</span>
+          <span class="toc-text">Connect & Contact</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ABOUT & EDUCATION SECTION -->
+    <section class="section-block" id="about">
+      <div class="section-title">About Me</div>
+
+      <div class="edu-box">
+        <div class="edu-title">Academic Background</div>
+        <p class="edu-desc">
+          Currently pursuing <strong>Bachelor of Computer Applications (BCA) — 2nd Year</strong> at <strong>VBSPU (Veer Bahadur Singh Purvanchal University)</strong>. Continuously experimenting with modern AI tools, video editing suites, photo manipulation, and ethical bug hunting.
+        </p>
+      </div>
+    </section>
+
+    <!-- SKILLS & EXPERTISE -->
+    <section class="section-block" id="skills">
+      <div class="section-title">Skills & Capabilities</div>
+
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-card-num">01</div>
+          <div class="skill-card-title">Photo Editing & Manipulation</div>
+          <div class="skill-card-desc">High-end retouching, color grading, lighting adjustment, and aesthetic photo manipulation.</div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-card-num">02</div>
+          <div class="skill-card-title">Video Editing & AI Videos</div>
+          <div class="skill-card-desc">Cinematic post-production, cuts, transitions, sound design, and AI-assisted video editing.</div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-card-num">03</div>
+          <div class="skill-card-title">AI Training & Prompting</div>
+          <div class="skill-card-desc">LLM prompt engineering, fine-tuning AI models, and leveraging generative AI workflows.</div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-card-num">04</div>
+          <div class="skill-card-title">AI Website Development</div>
+          <div class="skill-card-desc">Building fast, modern, AI-powered web applications and responsive web layouts.</div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-card-num">05</div>
+          <div class="skill-card-title">Content Creation</div>
+          <div class="skill-card-desc">Creating engaging digital content, visual storytelling, and social media creative assets.</div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-card-num">06</div>
+          <div class="skill-card-title">Bug Hunting & Hacking</div>
+          <div class="skill-card-desc">Ethical bug bounty hunting, web security analysis, vulnerability testing, and Burp Suite tools.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER WITH EXACT WORKING SOCIAL LINKS -->
+    <footer class="footer-section" id="contact">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">Let's Connect</h2>
+        </div>
+
+        <!-- EXACT WORKING SOCIAL LINKS -->
+        <div class="social-bar">
+          <!-- Gmail -->
+          <a href="mailto:navnitmaurya60@gmail.com" class="social-link" title="Gmail: navnitmaurya60@gmail.com" onclick="showToast('Opening Gmail (navnitmaurya60@gmail.com)...')">
+            <svg class="social-icon" viewBox="0 0 24 24">
+              <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+          </a>
+
+          <!-- Instagram -->
+          <a href="https://instagram.com/mr.navnit.01" target="_blank" rel="noopener" class="social-link" title="Instagram: @mr.navnit.01" onclick="showToast('Opening Instagram (@mr.navnit.01)...')">
+            <svg class="social-icon" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </a>
+
+          <!-- LinkedIn -->
+          <a href="https://linkedin.com/in/mrnavnit01" target="_blank" rel="noopener" class="social-link" title="LinkedIn: @mrnavnit01" onclick="showToast('Opening LinkedIn (@mrnavnit01)...')">
+            <svg class="social-icon" viewBox="0 0 24 24">
+              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.262-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+            </svg>
+          </a>
+
+          <!-- GitHub -->
+          <a href="https://github.com/mrnavnit01" target="_blank" rel="noopener" class="social-link" title="GitHub: mrnavnit01" onclick="showToast('Opening GitHub (mrnavnit01)...')">
+            <svg class="social-icon" viewBox="0 0 24 24">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast" id="toast">Opening link...</div>
+
+  <!-- CANVAS SCROLL ENGINE SCRIPT -->
+  <script>
+    const TOTAL_FRAMES = 240;
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const headerEl = document.getElementById('header');
+
+    const images = [];
+    let targetFrame = 0;
+    let currentFrame = 0;
+    let lastRenderedFrame = -1;
+
+    function getFrameFilename(index) {
+      const num = String(index + 1).padStart(3, '0');
+      return `ezgif-frame-${num}.jpg`;
+    }
+
+    function resizeCanvas() {
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      ctx.scale(dpr, dpr);
+      render(Math.round(currentFrame), true);
+    }
+
+    function render(frameIndex, force = false) {
+      const idx = Math.min(TOTAL_FRAMES - 1, Math.max(0, frameIndex));
+      if (!force && idx === lastRenderedFrame) return;
+
+      const img = images[idx];
+      if (!img || !img.complete || img.naturalWidth === 0) return;
+
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+
+      ctx.clearRect(0, 0, w, h);
+
+      // COVER SCALING LOGIC: Fills full width & height, zero black bars on sides
+      const imgRatio = img.naturalWidth / img.naturalHeight;
+      const screenRatio = w / h;
+
+      let drawW, drawH, x, y;
+      if (screenRatio > imgRatio) {
+        drawW = w;
+        drawH = w / imgRatio;
+        x = 0;
+        y = (h - drawH) / 2;
+      } else {
+        drawH = h;
+        drawW = h * imgRatio;
+        x = (w - drawW) / 2;
+        y = 0;
+      }
+
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
+      ctx.drawImage(img, x, y, drawW, drawH);
+
+      lastRenderedFrame = idx;
+    }
+
+    function getScrollProgress() {
+      const scrollTop = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+      const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      return Math.min(1, Math.max(0, scrollTop / maxScroll));
+    }
+
+    function onScroll() {
+      const scrollTop = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+
+      // Smoothly hide top header bar upwards on scroll and reveal when back at top
+      if (scrollTop > 40) {
+        headerEl.classList.add('scrolled-out');
+      } else {
+        headerEl.classList.remove('scrolled-out');
+      }
+
+      const progress = getScrollProgress();
+      targetFrame = progress * (TOTAL_FRAMES - 1);
+    }
+
+    function loop() {
+      currentFrame += (targetFrame - currentFrame) * 0.15;
+      if (Math.abs(targetFrame - currentFrame) < 0.001) {
+        currentFrame = targetFrame;
+      }
+      render(Math.round(currentFrame));
+      requestAnimationFrame(loop);
+    }
+
+    for (let i = 0; i < TOTAL_FRAMES; i++) {
+      const img = new Image();
+      img.src = getFrameFilename(i);
+      img.onload = () => {
+        if (i === 0) render(0, true);
+      };
+      images.push(img);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => { toast.classList.remove('show'); }, 2500);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', resizeCanvas);
+
+    resizeCanvas();
+    onScroll();
+    requestAnimationFrame(loop);
+  </script>
+</body>
+</html>
