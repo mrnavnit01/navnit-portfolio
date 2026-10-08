@@ -1,0 +1,13 @@
+{
+  "name": "navnit-maurya-portfolio",
+  "version": "1.0.0",
+  "description": "Production-ready 60FPS canvas scroll animation portfolio for Navnit Maurya",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server . -p 8080 -c-1",
+    "build": "echo Static site - no build step required"
+  },
+  "keywords": ["portfolio", "canvas-animation", "scroll-sequence"],
+  "author": "Navnit Maurya",
+  "license": "MIT"
+}
