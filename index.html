@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Navnit Maurya — Portfolio</title>
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts: Elegant Luxury & Modern Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Cinzel:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
@@ -26,7 +26,7 @@
       scroll-behavior: smooth;
     }
 
-    /* FULLSCREEN CANVAS SCROLL ANIMATION & BACKGROUND IMAGE FALLBACK */
+    /* FULLSCREEN CANVAS SCROLL ANIMATION (COVER MODE - NO BLACK BARS) */
     .canvas-container {
       position: fixed;
       top: 0;
@@ -55,7 +55,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle at center, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.4) 75%, rgba(0, 0, 0, 0.85) 100%);
+      background: radial-gradient(circle at center, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.45) 75%, rgba(0, 0, 0, 0.9) 100%);
       pointer-events: none;
     }
 
@@ -86,7 +86,7 @@
       z-index: 10;
     }
 
-    /* HEADER - FULLY TRANSPARENT AND DISAPPEARS UPWARDS ON SCROLL WITH ANIMATION */
+    /* HEADER - FULLY TRANSPARENT & DISAPPEARS UPWARDS ON SCROLL */
     header {
       position: fixed;
       top: 0;
@@ -98,7 +98,6 @@
       padding: 24px 48px;
       z-index: 100;
       background: transparent;
-      backdrop-filter: none;
       border: none;
       transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s ease;
       transform: translateY(0);
@@ -127,11 +126,39 @@
       text-transform: uppercase;
     }
 
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
     .year-tag {
       font-family: 'Cinzel', serif;
       font-size: 0.95rem;
       color: #e5c158;
       font-weight: 700;
+    }
+
+    .btn-header-contact {
+      background: rgba(229, 193, 88, 0.12);
+      border: 1px solid #e5c158;
+      color: #e5c158;
+      font-family: 'Cinzel', serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 7px 18px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .btn-header-contact:hover {
+      background: #e5c158;
+      color: #000000;
+      box-shadow: 0 0 15px rgba(229, 193, 88, 0.5);
     }
 
     /* HERO SECTION */
@@ -143,7 +170,7 @@
 
     .hero-text-grid {
       position: sticky;
-      top: 200px;
+      top: 180px;
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
@@ -166,7 +193,7 @@
 
     .hero-name-huge {
       font-family: 'Syne', sans-serif;
-      font-size: clamp(2.2rem, 4.4vw, 4.2rem);
+      font-size: clamp(2.4rem, 4.5vw, 4.4rem);
       font-weight: 900;
       line-height: 1;
       color: #ffffff;
@@ -181,10 +208,68 @@
     }
 
     .hero-bio {
-      font-size: 0.96rem;
+      font-size: 0.95rem;
       line-height: 1.65;
       color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 18px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
       margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn-hero-contact {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #e5c158;
+      color: #000000;
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 11px 22px;
+      border-radius: 30px;
+      cursor: pointer;
+      border: 1px solid #e5c158;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 20px rgba(229, 193, 88, 0.4);
+    }
+
+    .btn-hero-contact:hover {
+      background: transparent;
+      color: #e5c158;
+      box-shadow: 0 0 25px rgba(229, 193, 88, 0.6);
+      transform: translateY(-2px);
+    }
+
+    .btn-hero-projects {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      color: #ffffff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 11px 20px;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-hero-projects:hover {
+      border-color: #e5c158;
+      color: #e5c158;
+      background: rgba(229, 193, 88, 0.1);
+      transform: translateY(-2px);
     }
 
     .hero-sig {
@@ -234,7 +319,7 @@
       letter-spacing: 0.12em;
       color: #e5c158;
       text-transform: uppercase;
-      margin-bottom: 40px;
+      margin-bottom: 36px;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -249,7 +334,7 @@
     /* TABLE OF CONTENTS */
     .toc-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 20px;
     }
 
@@ -261,11 +346,12 @@
       gap: 16px;
       text-decoration: none;
       color: #ffffff;
-      transition: border-color 0.3s;
+      transition: all 0.3s;
     }
 
     .toc-item:hover {
       border-color: #e5c158;
+      transform: translateX(4px);
     }
 
     .toc-num {
@@ -280,6 +366,143 @@
       font-weight: 800;
       letter-spacing: 0.08em;
       text-transform: uppercase;
+    }
+
+    /* LIVE FEATURED PROJECTS SECTION */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+
+    .project-card {
+      background: rgba(12, 12, 16, 0.65);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(229, 193, 88, 0.3);
+      border-radius: 16px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.35s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .project-card:hover {
+      border-color: #e5c158;
+      transform: translateY(-6px);
+      box-shadow: 0 15px 35px rgba(229, 193, 88, 0.18);
+    }
+
+    .project-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      color: #e5c158;
+      background: rgba(229, 193, 88, 0.12);
+      border: 1px solid rgba(229, 193, 88, 0.3);
+      padding: 4px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      width: max-content;
+    }
+
+    .project-badge .live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 8px #4ade80;
+    }
+
+    .project-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+    }
+
+    .project-desc {
+      font-size: 0.92rem;
+      line-height: 1.65;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 24px;
+    }
+
+    .project-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .feature-pill {
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 5px 12px;
+      border-radius: 8px;
+    }
+
+    .btn-project-live {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: rgba(229, 193, 88, 0.15);
+      border: 1px solid #e5c158;
+      color: #e5c158;
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .btn-project-live:hover {
+      background: #e5c158;
+      color: #000000;
+      box-shadow: 0 0 20px rgba(229, 193, 88, 0.4);
+    }
+
+    /* ABOUT EDUCATION BOX */
+    .edu-box {
+      margin-top: 10px;
+      padding: 28px;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(229, 193, 88, 0.35);
+      border-radius: 12px;
+      backdrop-filter: blur(12px);
+    }
+
+    .edu-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #e5c158;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .edu-desc {
+      font-size: 0.92rem;
+      color: #ffffff;
+      line-height: 1.6;
     }
 
     /* SKILLS & SERVICES GRID */
@@ -317,32 +540,7 @@
       line-height: 1.6;
     }
 
-    /* EDUCATION BOX */
-    .edu-box {
-      margin-top: 20px;
-      padding: 28px;
-      background: rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(229, 193, 88, 0.35);
-      border-radius: 10px;
-      backdrop-filter: blur(12px);
-    }
-
-    .edu-title {
-      font-family: 'Cinzel', serif;
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: #e5c158;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
-    .edu-desc {
-      font-size: 0.92rem;
-      color: #ffffff;
-      line-height: 1.6;
-    }
-
-    /* FOOTER & WORKING EXACT SOCIAL LINKS */
+    /* FOOTER & WORKING SOCIAL LINKS */
     .footer-section {
       padding: 90px 48px;
       border-top: 1px solid rgba(255, 255, 255, 0.12);
@@ -355,7 +553,7 @@
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 40px;
+      gap: 30px;
     }
 
     .footer-title {
@@ -367,15 +565,28 @@
       text-transform: uppercase;
     }
 
-    .social-bar {
+    .footer-subtitle {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-top: 6px;
+    }
+
+    .footer-actions {
       display: flex;
       align-items: center;
       gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .social-bar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
     }
 
     .social-link {
-      width: 54px;
-      height: 54px;
+      width: 52px;
+      height: 52px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(229, 193, 88, 0.45);
@@ -386,6 +597,7 @@
       text-decoration: none;
       transition: all 0.3s ease;
       box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      cursor: pointer;
     }
 
     .social-link:hover {
@@ -396,9 +608,312 @@
     }
 
     .social-icon {
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
       fill: currentColor;
+    }
+
+    /* MODAL POPUP FORM (MATCHING THEME, GOLD ACCENTS) */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(14px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-container {
+      background: #0a0a0e;
+      border: 1px solid rgba(229, 193, 88, 0.45);
+      box-shadow: 0 0 50px rgba(229, 193, 88, 0.25), 0 20px 40px rgba(0,0,0,0.9);
+      border-radius: 18px;
+      width: 100%;
+      max-width: 520px;
+      padding: 36px 32px;
+      position: relative;
+      transform: scale(0.92) translateY(20px);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-overlay.active .modal-container {
+      transform: scale(1) translateY(0);
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(229, 193, 88, 0.3);
+      color: #e5c158;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .modal-close-btn:hover {
+      background: #e5c158;
+      color: #000;
+    }
+
+    .modal-header {
+      margin-bottom: 24px;
+      padding-right: 36px;
+    }
+
+    .modal-tag {
+      font-size: 0.75rem;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      color: #e5c158;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .modal-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 6px;
+    }
+
+    .form-label span {
+      color: #e5c158;
+    }
+
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(229, 193, 88, 0.25);
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.92rem;
+      color: #ffffff;
+      outline: none;
+      transition: all 0.25s;
+    }
+
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: #e5c158;
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 0 12px rgba(229, 193, 88, 0.2);
+    }
+
+    .form-select option {
+      background: #111116;
+      color: #ffffff;
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 95px;
+    }
+
+    .char-counter {
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.5);
+      text-align: right;
+      margin-top: 4px;
+    }
+
+    .btn-form-submit {
+      width: 100%;
+      background: #e5c158;
+      color: #000000;
+      border: 1px solid #e5c158;
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-form-submit:hover {
+      background: transparent;
+      color: #e5c158;
+      box-shadow: 0 0 20px rgba(229, 193, 88, 0.4);
+    }
+
+    .btn-form-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* FULLSCREEN ANIMATED SUCCESS POPUP OVERLAY WITH CHECKMARK & CONFETTI */
+    .success-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.88);
+      backdrop-filter: blur(16px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .success-modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .success-card {
+      background: #0d0d12;
+      border: 1px solid #4ade80;
+      box-shadow: 0 0 60px rgba(74, 222, 128, 0.3), 0 20px 50px rgba(0,0,0,0.95);
+      border-radius: 20px;
+      max-width: 460px;
+      width: 100%;
+      padding: 40px 32px;
+      text-align: center;
+      transform: scale(0.85);
+      transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .success-modal-overlay.active .success-card {
+      transform: scale(1);
+    }
+
+    .success-checkmark-wrap {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: rgba(74, 222, 128, 0.12);
+      border: 2px solid #4ade80;
+      box-shadow: 0 0 30px rgba(74, 222, 128, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px auto;
+      animation: pulseGlow 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 25px rgba(74, 222, 128, 0.4); }
+      50% { transform: scale(1.06); box-shadow: 0 0 40px rgba(74, 222, 128, 0.6); }
+    }
+
+    .checkmark-svg {
+      width: 44px;
+      height: 44px;
+      stroke: #4ade80;
+      stroke-width: 3.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+      stroke-dasharray: 50;
+      stroke-dashoffset: 50;
+      animation: checkDraw 0.6s 0.2s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+    }
+
+    @keyframes checkDraw {
+      100% { stroke-dashoffset: 0; }
+    }
+
+    .success-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+    }
+
+    .success-desc {
+      font-size: 0.94rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 28px;
+    }
+
+    .btn-success-close {
+      background: #e5c158;
+      color: #000000;
+      border: 1px solid #e5c158;
+      font-family: 'Cinzel', serif;
+      font-size: 0.88rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 12px 30px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      width: 100%;
+    }
+
+    .btn-success-close:hover {
+      background: transparent;
+      color: #e5c158;
+      box-shadow: 0 0 20px rgba(229, 193, 88, 0.4);
+    }
+
+    /* Confetti Particle Canvas */
+    #confettiCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 2001;
     }
 
     /* TOAST NOTIFICATION */
@@ -428,11 +943,18 @@
     /* Responsive */
     @media (max-width: 900px) {
       .hero-text-grid { flex-direction: column; gap: 30px; }
-      .toc-grid { grid-template-columns: 1fr; }
+      .toc-grid { grid-template-columns: repeat(2, 1fr); }
+      .projects-grid { grid-template-columns: 1fr; }
       .skills-grid { grid-template-columns: 1fr; }
       .footer-grid { flex-direction: column; align-items: flex-start; }
       header { padding: 16px 24px; }
       .hero-section, .section-block, .footer-section { padding: 60px 24px; }
+      .modal-container { padding: 28px 20px; }
+    }
+
+    @media (max-width: 550px) {
+      .toc-grid { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
@@ -441,7 +963,7 @@
   <!-- BACKGROUND WATERMARK TITLE (BEHIND PERSON'S FACE) -->
   <div class="bg-portfolio-watermark">PORTFOLIO</div>
 
-  <!-- FULLSCREEN ZOOMED CANVAS SCROLL ANIMATION & BACKGROUND IMAGE FALLBACK -->
+  <!-- FULLSCREEN CANVAS SCROLL ANIMATION (COVER MODE) -->
   <div class="canvas-container">
     <canvas id="canvas"></canvas>
     <div class="canvas-vignette"></div>
@@ -450,13 +972,16 @@
   <!-- OVERLAID PORTFOLIO CONTENT -->
   <div class="content-wrapper">
 
-    <!-- HEADER NAVIGATION (SMOOTHLY FADES OUT AND SLIDES UP ON SCROLL) -->
+    <!-- HEADER NAVIGATION (SMOOTHLY DISAPPEARS ON SCROLL) -->
     <header id="header">
       <div>
         <div class="brand-logo">NM</div>
         <div class="brand-sub">Digital Creator & Tech Explorer</div>
       </div>
-      <div class="year-tag">2026</div>
+      <div class="header-right">
+        <button class="btn-header-contact" onclick="openContactModal()">Contact Me</button>
+        <div class="year-tag">2026</div>
+      </div>
     </header>
 
     <!-- HERO SECTION -->
@@ -468,7 +993,18 @@
           <p class="hero-bio">
             Passionate about Photo Editing, Video Editing, AI Training & Prompt Engineering, AI Website Development, Content Creation, and Cybersecurity Bug Hunting.
           </p>
-          <div class="hero-sig">Navnit Maurya</div>
+          
+          <!-- QUICK ACTION BUTTONS -->
+          <div class="hero-actions">
+            <button class="btn-hero-contact" onclick="openContactModal()">
+              Let's Connect ✦
+            </button>
+            <a href="#projects" class="btn-hero-projects">
+              View Live Works ↗
+            </a>
+          </div>
+
+          
         </div>
 
         <div class="hero-right">
@@ -478,6 +1014,7 @@
           <div class="location-tag">
             📍 VBSPU University, India
           </div>
+          <div class="hero-sig">Navnit Maurya</div>
         </div>
       </div>
     </section>
@@ -491,12 +1028,16 @@
           <span class="toc-num">01</span>
           <span class="toc-text">About & Education</span>
         </a>
-        <a href="#skills" class="toc-item">
+        <a href="#projects" class="toc-item">
           <span class="toc-num">02</span>
-          <span class="toc-text">Skills & Expertise</span>
+          <span class="toc-text">Live Web Apps</span>
+        </a>
+        <a href="#skills" class="toc-item">
+          <span class="toc-num">03</span>
+          <span class="toc-text">Skills & Capabilities</span>
         </a>
         <a href="#contact" class="toc-item">
-          <span class="toc-num">03</span>
+          <span class="toc-num">04</span>
           <span class="toc-text">Connect & Contact</span>
         </a>
       </div>
@@ -511,6 +1052,67 @@
         <p class="edu-desc">
           Currently pursuing <strong>Bachelor of Computer Applications (BCA) — 2nd Year</strong> at <strong>VBSPU (Veer Bahadur Singh Purvanchal University)</strong>. Continuously experimenting with modern AI tools, video editing suites, photo manipulation, and ethical bug hunting.
         </p>
+      </div>
+    </section>
+
+    <!-- FEATURED LIVE PROJECTS (RENDER DEPLOYED WEB APPS) -->
+    <section class="section-block" id="projects">
+      <div class="section-title">Featured Live Works</div>
+
+      <div class="projects-grid">
+
+        <!-- Project 1: Navnit Tools Suite -->
+        <div class="project-card">
+          <div>
+            <div class="project-badge">
+              <span class="live-dot"></span> Live on Render
+            </div>
+            <h3 class="project-title">Navnit Tools Suite</h3>
+            <p class="project-desc">
+              Comprehensive 100% free web utility running directly in the browser. Features client-side zero-latency processing, no sign-ups, and complete file privacy.
+            </p>
+            <div class="project-features">
+              <span class="feature-pill">✂️ BG Remover</span>
+              <span class="feature-pill">📄 JPG to PDF</span>
+              <span class="feature-pill">🗜️ KB Compressor</span>
+              <span class="feature-pill">🔐 Password Gen</span>
+              <span class="feature-pill">📱 QR Code</span>
+              <span class="feature-pill">📏 Unit Converter</span>
+            </div>
+          </div>
+          <div>
+            <a href="https://navnit-tools-suite.onrender.com/" target="_blank" rel="noopener" class="btn-project-live">
+              Visit Live Website ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 2: BCA Hub -->
+        <div class="project-card">
+          <div>
+            <div class="project-badge">
+              <span class="live-dot"></span> Live on Render
+            </div>
+            <h3 class="project-title">BCA Hub</h3>
+            <p class="project-desc">
+              Curated academic portal built for computer application students. Includes semester revision notes, reference links, interactive coding challenges, and project blueprints.
+            </p>
+            <div class="project-features">
+              <span class="feature-pill">📚 Free BCA Notes</span>
+              <span class="feature-pill">🔗 24 Resources</span>
+              <span class="feature-pill">💻 C / Python / JS</span>
+              <span class="feature-pill">🧩 8 Coding Problems</span>
+              <span class="feature-pill">💡 9 Project Ideas</span>
+              <span class="feature-pill">🎓 VBSPU Focused</span>
+            </div>
+          </div>
+          <div>
+            <a href="https://navnit-bca-hub.onrender.com/" target="_blank" rel="noopener" class="btn-project-live">
+              Visit Live Website ↗
+            </a>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -557,52 +1159,141 @@
       </div>
     </section>
 
-    <!-- FOOTER WITH EXACT WORKING SOCIAL LINKS -->
+    <!-- FOOTER WITH SOCIAL LINKS & CONTACT MODAL TRIGGER -->
     <footer class="footer-section" id="contact">
       <div class="footer-grid">
         <div>
           <h2 class="footer-title">Let's Connect</h2>
+          <p class="footer-subtitle">Available for freelancing, media editing & web projects.</p>
         </div>
 
-        <!-- EXACT WORKING SOCIAL LINKS -->
-        <div class="social-bar">
-          <!-- Gmail -->
-          <a href="mailto:navnitmaurya60@gmail.com" class="social-link" title="Gmail: navnitmaurya60@gmail.com" onclick="showToast('Opening Gmail (navnitmaurya60@gmail.com)...')">
-            <svg class="social-icon" viewBox="0 0 24 24">
-              <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-            </svg>
-          </a>
+        <div class="footer-actions">
+          <!-- MODAL TRIGGER BUTTON -->
+          <button class="btn-hero-contact" onclick="openContactModal()">
+            Send Message ✉
+          </button>
 
-          <!-- Instagram -->
-          <a href="https://instagram.com/mr.navnit.01" target="_blank" rel="noopener" class="social-link" title="Instagram: @mr.navnit.01" onclick="showToast('Opening Instagram (@mr.navnit.01)...')">
-            <svg class="social-icon" viewBox="0 0 24 24">
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-            </svg>
-          </a>
+          <!-- WORKING SOCIAL ICONS (100% RELIABLE) -->
+          <div class="social-bar">
+            <!-- Gmail Icon (Opens Web Gmail in New Tab Directly) -->
+            <a href="javascript:void(0)" onclick="openEmailApp()" class="social-link" title="Send Email: navnitmaurya60@gmail.com">
+              <svg class="social-icon" viewBox="0 0 24 24">
+                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+            </a>
 
-          <!-- LinkedIn -->
-          <a href="https://linkedin.com/in/mrnavnit01" target="_blank" rel="noopener" class="social-link" title="LinkedIn: @mrnavnit01" onclick="showToast('Opening LinkedIn (@mrnavnit01)...')">
-            <svg class="social-icon" viewBox="0 0 24 24">
-              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.262-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-            </svg>
-          </a>
+            <!-- Instagram -->
+            <a href="https://instagram.com/mr.navnit.01" target="_blank" rel="noopener" class="social-link" title="Instagram: @mr.navnit.01" onclick="showToast('Opening Instagram (@mr.navnit.01)...')">
+              <svg class="social-icon" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </a>
 
-          <!-- GitHub -->
-          <a href="https://github.com/mrnavnit01" target="_blank" rel="noopener" class="social-link" title="GitHub: mrnavnit01" onclick="showToast('Opening GitHub (mrnavnit01)...')">
-            <svg class="social-icon" viewBox="0 0 24 24">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-            </svg>
-          </a>
+            <!-- LinkedIn -->
+            <a href="https://linkedin.com/in/mrnavnit01" target="_blank" rel="noopener" class="social-link" title="LinkedIn: @mrnavnit01" onclick="showToast('Opening LinkedIn (@mrnavnit01)...')">
+              <svg class="social-icon" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.262-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+            </a>
+
+            <!-- GitHub -->
+            <a href="https://github.com/mrnavnit01" target="_blank" rel="noopener" class="social-link" title="GitHub: mrnavnit01" onclick="showToast('Opening GitHub (mrnavnit01)...')">
+              <svg class="social-icon" viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
     </footer>
 
   </div>
 
-  <!-- TOAST NOTIFICATION -->
-  <div class="toast" id="toast">Opening link...</div>
+  <!-- CONTACT MODAL POPUP (MATCHING DESIGN, GOLD BORDER, CUSTOM FIELDS) -->
+  <div class="modal-overlay" id="contactModal">
+    <div class="modal-container">
+      <button class="modal-close-btn" onclick="closeContactModal()" title="Close (Esc)">✕</button>
+      
+      <div class="modal-header">
+        <div class="modal-tag">Get in Touch</div>
+        <h3 class="modal-title">Work With Navnit</h3>
+      </div>
 
-  <!-- CANVAS SCROLL ENGINE SCRIPT -->
+      <form id="contactForm" onsubmit="handleFormSubmit(event)">
+        <!-- Honeypot -->
+        <input type="text" name="_honey" style="display:none">
+
+        <!-- Name -->
+        <div class="form-group">
+          <label class="form-label" for="clientName">Your Name <span>*</span></label>
+          <input type="text" id="clientName" name="name" class="form-input" placeholder="e.g. Rahul Sharma" required autocomplete="name">
+        </div>
+
+        <!-- Phone Number -->
+        <div class="form-group">
+          <label class="form-label" for="clientPhone">Phone Number <span>*</span></label>
+          <input type="tel" id="clientPhone" name="phone" class="form-input" placeholder="e.g. 9876543210 (10 digits)" pattern="[6-9][0-9]{9}" required title="Please enter a valid 10-digit Indian phone number" autocomplete="tel">
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label class="form-label" for="clientEmail">Email Address</label>
+          <input type="email" id="clientEmail" name="email" class="form-input" placeholder="e.g. yourname@gmail.com" autocomplete="email">
+        </div>
+
+        <!-- Kya Kaam Hai (Service / Work Type) -->
+        <div class="form-group">
+          <label class="form-label" for="workType">What Work Do You Need? <span>*</span></label>
+          <select id="workType" name="service" class="form-select" required>
+            <option value="Video Editing & AI Videos">🎬 Video Editing & AI Videos</option>
+            <option value="Photo Editing & Retouching">📸 Photo Editing & Retouching</option>
+            <option value="AI Website Development">🌐 AI Website Development</option>
+            <option value="AI Training & Prompt Engineering">🧠 AI Prompt Engineering & Training</option>
+            <option value="Bug Hunting & Security Audit">🛡️ Bug Hunting & Web Security Audit</option>
+            <option value="Content Creation / Other">✍️ Content Creation / Other Work</option>
+          </select>
+        </div>
+
+        <!-- Description / Details -->
+        <div class="form-group">
+          <label class="form-label" for="projectDesc">Project Description / Details <span>*</span></label>
+          <textarea id="projectDesc" name="details" class="form-textarea" placeholder="Tell me about your project, timeline, and requirements..." maxlength="500" oninput="updateCharCount(this)" required></textarea>
+          <div class="char-counter" id="charCounter">0 / 500</div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn-form-submit" id="submitBtn">
+          Send Message ✦
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- FULLSCREEN ANIMATED SUCCESS POPUP OVERLAY WITH CHECKMARK & CONFETTI -->
+  <div class="success-modal-overlay" id="successModal">
+    <div class="success-card">
+      <div class="success-checkmark-wrap">
+        <svg class="checkmark-svg" viewBox="0 0 24 24">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+      <h3 class="success-title">Message Sent Successfully!</h3>
+      <p class="success-desc">
+        Thank you for reaching out! Your message has been delivered to <strong>Navnit Maurya</strong>. I will review your requirements and get back to you shortly.
+      </p>
+      <button type="button" class="btn-success-close" onclick="closeSuccessModal()">
+        Got It ✦
+      </button>
+    </div>
+  </div>
+
+  <!-- Confetti Canvas -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast" id="toast">Opening...</div>
+
+  <!-- SCRIPT ENGINE -->
   <script>
     const TOTAL_FRAMES = 240;
     const canvas = document.getElementById('canvas');
@@ -706,6 +1397,179 @@
       toast.textContent = msg;
       toast.classList.add('show');
       setTimeout(() => { toast.classList.remove('show'); }, 2500);
+    }
+
+    /* 100% RELIABLE EMAIL OPENER (OPENS GMAIL WEB DIRECTLY OR MAILTO) */
+    function openEmailApp() {
+      showToast('Opening Gmail to message Navnit...');
+      // Open Web Gmail compose window in a new tab (always works on all systems without email app configuration)
+      const gmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=navnitmaurya60@gmail.com&su=Project%20Inquiry%20-%20Navnit%20Maurya%20Portfolio';
+      const win = window.open(gmailUrl, '_blank');
+      if (!win) {
+        // Fallback for popup blocker
+        window.location.href = 'mailto:navnitmaurya60@gmail.com?subject=Project%20Inquiry%20-%20Navnit%20Maurya%20Portfolio';
+      }
+    }
+
+    /* MODAL POPUP LOGIC */
+    function openContactModal() {
+      document.getElementById('contactModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => document.getElementById('clientName').focus(), 100);
+    }
+
+    function closeContactModal() {
+      document.getElementById('contactModal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function openSuccessModal() {
+      document.getElementById('successModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+      startConfetti();
+    }
+
+    function closeSuccessModal() {
+      document.getElementById('successModal').classList.remove('active');
+      document.body.style.overflow = '';
+      stopConfetti();
+    }
+
+    // Close on escape key
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeContactModal();
+        closeSuccessModal();
+      }
+    });
+
+    document.getElementById('contactModal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('contactModal')) {
+        closeContactModal();
+      }
+    });
+
+    document.getElementById('successModal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('successModal')) {
+        closeSuccessModal();
+      }
+    });
+
+    function updateCharCount(el) {
+      document.getElementById('charCounter').textContent = `${el.value.length} / 500`;
+    }
+
+    /* FORM SUBMISSION HANDLER WITH ANIMATED SUCCESS CELEBRATION */
+    async function handleFormSubmit(e) {
+      e.preventDefault();
+      const submitBtn = document.getElementById('submitBtn');
+      const form = document.getElementById('contactForm');
+
+      const phone = document.getElementById('clientPhone').value.trim();
+      const phoneRegex = /^[6-9]\d{9}$/;
+      if (!phoneRegex.test(phone)) {
+        showToast('Please enter a valid 10-digit Indian phone number.');
+        document.getElementById('clientPhone').focus();
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending Message...';
+
+      const formData = new FormData(form);
+
+      try {
+        const res = await fetch('https://formsubmit.co/ajax/navnitmaurya60@gmail.com', {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          form.reset();
+          document.getElementById('charCounter').textContent = '0 / 500';
+          closeContactModal();
+          // Open animated success celebration popup
+          openSuccessModal();
+        } else {
+          throw new Error('Submission failed');
+        }
+      } catch (err) {
+        // Even if offline/network fails, provide seamless mailto fallback
+        showToast('Direct network send failed. Opening Email directly...');
+        setTimeout(() => {
+          openEmailApp();
+        }, 1200);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Message ✦';
+      }
+    }
+
+    /* LIGHTWEIGHT LUXURY GOLD & GREEN CONFETTI CANNON */
+    const confettiCanvas = document.getElementById('confettiCanvas');
+    const confettiCtx = confettiCanvas.getContext('2d');
+    let confettiParticles = [];
+    let confettiAnimationId = null;
+
+    function resizeConfetti() {
+      confettiCanvas.width = window.innerWidth;
+      confettiCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeConfetti);
+    resizeConfetti();
+
+    function startConfetti() {
+      confettiParticles = [];
+      const colors = ['#e5c158', '#4ade80', '#ffffff', '#ffd700', '#22c55e'];
+      for (let i = 0; i < 90; i++) {
+        confettiParticles.push({
+          x: window.innerWidth / 2 + (Math.random() * 200 - 100),
+          y: window.innerHeight / 2 + (Math.random() * 100 - 50),
+          vx: (Math.random() - 0.5) * 16,
+          vy: (Math.random() - 1.2) * 16,
+          size: Math.random() * 8 + 5,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          rotSpeed: (Math.random() - 0.5) * 10,
+          opacity: 1
+        });
+      }
+      renderConfetti();
+    }
+
+    function renderConfetti() {
+      confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+      let alive = false;
+      confettiParticles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.45; // Gravity
+        p.rotation += p.rotSpeed;
+        p.opacity -= 0.007;
+
+        if (p.opacity > 0 && p.y < confettiCanvas.height) {
+          alive = true;
+          confettiCtx.save();
+          confettiCtx.globalAlpha = Math.max(0, p.opacity);
+          confettiCtx.translate(p.x, p.y);
+          confettiCtx.rotate((p.rotation * Math.PI) / 180);
+          confettiCtx.fillStyle = p.color;
+          confettiCtx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+          confettiCtx.restore();
+        }
+      });
+
+      if (alive) {
+        confettiAnimationId = requestAnimationFrame(renderConfetti);
+      } else {
+        confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+      }
+    }
+
+    function stopConfetti() {
+      if (confettiAnimationId) cancelAnimationFrame(confettiAnimationId);
+      confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
