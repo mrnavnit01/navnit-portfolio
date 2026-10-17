@@ -1,0 +1,571 @@
+/* ==========================================================================
+   NAVNIT AI — CUTE & PREMIUM FLOATING ASSISTANT STYLING
+   ========================================================================== */
+
+:root {
+  --ai-purple: #9d4edd;
+  --ai-purple-dark: #6a1b9a;
+  --ai-purple-glow: rgba(157, 78, 221, 0.45);
+  --ai-cyan: #00f2fe;
+  --ai-cyan-glow: rgba(0, 242, 254, 0.35);
+  --ai-gold: #e5c158;
+  --ai-bg-dark: #0a0b12;
+  --ai-bg-panel: rgba(13, 14, 22, 0.94);
+  --ai-border: rgba(157, 78, 221, 0.3);
+  --ai-text-main: #f3f4f6;
+  --ai-text-muted: #9ca3af;
+}
+
+/* 1. FLOATING LAUNCHER BUTTON */
+.navnit-ai-launcher {
+  position: fixed;
+  bottom: 26px;
+  right: 26px;
+  z-index: 990;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, rgba(157, 78, 221, 0.25), rgba(0, 242, 254, 0.2));
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid var(--ai-purple);
+  padding: 8px 16px 8px 10px;
+  border-radius: 40px;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px var(--ai-purple-glow);
+  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  user-select: none;
+  animation: navnitAiFloat 3.8s ease-in-out infinite;
+}
+
+.navnit-ai-launcher:hover {
+  transform: translateY(-4px) scale(1.04);
+  border-color: var(--ai-cyan);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 30px var(--ai-cyan-glow), 0 0 15px var(--ai-purple-glow);
+}
+
+.navnit-ai-launcher:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.navnit-ai-launcher.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px) scale(0.8);
+}
+
+@keyframes navnitAiFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* Mascot Icon Inside Launcher */
+.navnit-ai-mascot-wrapper {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navnit-ai-mascot-svg {
+  width: 42px;
+  height: 42px;
+  filter: drop-shadow(0 2px 8px rgba(157, 78, 221, 0.5));
+  transition: transform 0.3s ease;
+}
+
+.navnit-ai-launcher:hover .navnit-ai-mascot-svg {
+  transform: rotate(-6deg) scale(1.08);
+}
+
+/* Online Status Indicator */
+.navnit-ai-online-dot {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  width: 11px;
+  height: 11px;
+  background: #4ade80;
+  border: 2px solid #0a0b12;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #4ade80;
+  animation: onlinePulse 2s infinite;
+}
+
+@keyframes onlinePulse {
+  0%, 100% {
+    box-shadow: 0 0 4px #4ade80;
+  }
+  50% {
+    box-shadow: 0 0 12px #4ade80, 0 0 20px rgba(74, 222, 128, 0.5);
+  }
+}
+
+.navnit-ai-label {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.navnit-ai-name {
+  font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  font-size: 0.92rem;
+  color: #ffffff;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.navnit-ai-sparkle {
+  color: var(--ai-gold);
+  font-size: 0.75rem;
+}
+
+.navnit-ai-tagline {
+  font-size: 0.7rem;
+  color: var(--ai-cyan);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* 2. CHAT PANEL WINDOW */
+.navnit-ai-panel {
+  position: fixed;
+  bottom: 26px;
+  right: 26px;
+  width: 390px;
+  max-width: calc(100vw - 32px);
+  height: 570px;
+  max-height: calc(100vh - 50px);
+  background: var(--ai-bg-panel);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1.5px solid var(--ai-border);
+  border-radius: 22px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(157, 78, 221, 0.25);
+  z-index: 995;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(24px) scale(0.92);
+  transform-origin: bottom right;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navnit-ai-panel.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.navnit-ai-panel.minimized {
+  height: 64px !important;
+  border-radius: 18px;
+}
+
+.navnit-ai-panel.minimized .navnit-ai-body,
+.navnit-ai-panel.minimized .navnit-ai-footer,
+.navnit-ai-panel.minimized .navnit-ai-quick-pills {
+  display: none !important;
+}
+
+/* Header */
+.navnit-ai-header {
+  padding: 14px 18px;
+  background: linear-gradient(135deg, rgba(157, 78, 221, 0.25), rgba(7, 8, 14, 0.85));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+}
+
+.navnit-ai-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navnit-ai-header-mascot {
+  width: 36px;
+  height: 36px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navnit-ai-header-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.navnit-ai-header-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: 0.02em;
+}
+
+.navnit-ai-header-status {
+  font-size: 0.72rem;
+  color: #4ade80;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 600;
+}
+
+.navnit-ai-status-pulse {
+  width: 6px;
+  height: 6px;
+  background: #4ade80;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #4ade80;
+}
+
+.navnit-ai-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.navnit-ai-btn-ctrl {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--ai-text-muted);
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.85rem;
+}
+
+.navnit-ai-btn-ctrl:hover {
+  background: rgba(157, 78, 221, 0.25);
+  border-color: var(--ai-purple);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* Quick Prompt Suggestion Pills */
+.navnit-ai-quick-pills {
+  padding: 10px 14px 6px 14px;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  background: rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.navnit-ai-quick-pills::-webkit-scrollbar {
+  display: none;
+}
+
+.navnit-ai-pill {
+  white-space: nowrap;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(229, 193, 88, 0.25);
+  padding: 5px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.navnit-ai-pill:hover {
+  background: rgba(229, 193, 88, 0.15);
+  border-color: var(--ai-gold);
+  color: var(--ai-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(229, 193, 88, 0.2);
+}
+
+/* Chat Message Area */
+.navnit-ai-body {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  scroll-behavior: smooth;
+  background: radial-gradient(circle at 80% 20%, rgba(157, 78, 221, 0.06), transparent 50%);
+}
+
+.navnit-ai-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.navnit-ai-body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+}
+
+/* Messages */
+.navnit-ai-msg {
+  display: flex;
+  gap: 10px;
+  max-width: 88%;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  animation: msgFadeIn 0.3s ease;
+}
+
+@keyframes msgFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.navnit-ai-msg.assistant {
+  align-self: flex-start;
+}
+
+.navnit-ai-msg.user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.navnit-ai-msg-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navnit-ai-msg-bubble {
+  padding: 11px 15px;
+  border-radius: 16px;
+  word-break: break-word;
+  position: relative;
+}
+
+.navnit-ai-msg.assistant .navnit-ai-msg-bubble {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(157, 78, 221, 0.3);
+  color: var(--ai-text-main);
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.navnit-ai-msg.user .navnit-ai-msg-bubble {
+  background: linear-gradient(135deg, rgba(229, 193, 88, 0.25), rgba(157, 78, 221, 0.2));
+  border: 1px solid var(--ai-gold);
+  color: #ffffff;
+  border-bottom-right-radius: 4px;
+  box-shadow: 0 4px 15px rgba(229, 193, 88, 0.15);
+}
+
+/* Link Styling inside Assistant Responses */
+.navnit-ai-msg-bubble a {
+  color: var(--ai-cyan);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.navnit-ai-msg-bubble a:hover {
+  color: #ffffff;
+  text-shadow: 0 0 8px var(--ai-cyan);
+}
+
+.navnit-ai-msg-bubble ul, .navnit-ai-msg-bubble ol {
+  padding-left: 18px;
+  margin: 6px 0;
+}
+
+.navnit-ai-msg-bubble li {
+  margin-bottom: 4px;
+}
+
+.navnit-ai-msg-bubble code {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.82rem;
+  color: var(--ai-gold);
+  border: 1px solid rgba(229, 193, 88, 0.2);
+}
+
+/* Typing Indicator */
+.navnit-ai-typing {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(157, 78, 221, 0.25);
+  border-radius: 16px;
+  border-bottom-left-radius: 4px;
+  width: max-content;
+  align-self: flex-start;
+}
+
+.navnit-ai-typing-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--ai-purple);
+  border-radius: 50%;
+  animation: typingBounce 1.4s infinite ease-in-out;
+}
+
+.navnit-ai-typing-dot:nth-child(1) { animation-delay: -0.32s; }
+.navnit-ai-typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes typingBounce {
+  0%, 80%, 100% {
+    transform: scale(0.6);
+    opacity: 0.4;
+  }
+  40% {
+    transform: scale(1.2);
+    opacity: 1;
+    background: var(--ai-cyan);
+    box-shadow: 0 0 8px var(--ai-cyan);
+  }
+}
+
+/* Footer / Input Bar */
+.navnit-ai-footer {
+  padding: 12px 14px;
+  background: rgba(10, 11, 18, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.navnit-ai-input-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(157, 78, 221, 0.3);
+  border-radius: 14px;
+  padding: 4px 6px 4px 14px;
+  transition: all 0.25s;
+}
+
+.navnit-ai-input-form:focus-within {
+  border-color: var(--ai-cyan);
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 0 16px rgba(0, 242, 254, 0.2);
+}
+
+.navnit-ai-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.88rem;
+}
+
+.navnit-ai-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.82rem;
+}
+
+.navnit-ai-send-btn {
+  background: linear-gradient(135deg, var(--ai-purple), var(--ai-purple-dark));
+  border: 1px solid var(--ai-purple);
+  color: #ffffff;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s;
+  flex-shrink: 0;
+}
+
+.navnit-ai-send-btn:hover {
+  background: var(--ai-gold);
+  border-color: var(--ai-gold);
+  color: #000000;
+  box-shadow: 0 0 15px rgba(229, 193, 88, 0.5);
+  transform: scale(1.05);
+}
+
+.navnit-ai-send-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.navnit-ai-badge {
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.35);
+  text-align: center;
+  margin-top: 6px;
+}
+
+/* ACCESSIBILITY & PREFERS-REDUCED-MOTION */
+@media (prefers-reduced-motion: reduce) {
+  .navnit-ai-launcher,
+  .navnit-ai-online-dot,
+  .navnit-ai-typing-dot {
+    animation: none !important;
+  }
+  .navnit-ai-panel {
+    transition: opacity 0.1s ease !important;
+  }
+}
+
+/* MOBILE RESPONSIVE TWEAKS */
+@media (max-width: 600px) {
+  .navnit-ai-launcher {
+    bottom: 20px;
+    right: 20px;
+    padding: 6px 14px 6px 8px;
+  }
+  .navnit-ai-name {
+    font-size: 0.85rem;
+  }
+  .navnit-ai-tagline {
+    font-size: 0.65rem;
+  }
+  .navnit-ai-panel {
+    bottom: 12px;
+    right: 12px;
+    left: 12px;
+    width: auto;
+    max-width: none;
+    height: 82vh;
+    border-radius: 18px;
+  }
+}

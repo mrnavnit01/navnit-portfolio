@@ -1,13 +1,26 @@
 {
   "name": "navnit-maurya-portfolio",
-  "version": "1.0.0",
-  "description": "Production-ready 60FPS canvas scroll animation portfolio for Navnit Maurya",
-  "main": "index.html",
+  "version": "1.1.0",
+  "description": "Navnit Maurya's official portfolio featuring 240-frame scroll animation, live projects, and Navnit AI chatbot",
+  "main": "server.js",
   "scripts": {
-    "start": "npx http-server . -p 8080 -c-1",
-    "build": "echo Static site - no build step required"
+    "start": "node server.js",
+    "dev": "node server.js",
+    "build": "echo 'No build step required'"
   },
-  "keywords": ["portfolio", "canvas-animation", "scroll-sequence"],
+  "keywords": [
+    "portfolio",
+    "canvas-animation",
+    "scroll-sequence",
+    "ai-assistant",
+    "gemini-ai"
+  ],
   "author": "Navnit Maurya",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.8",
+    "express": "^5.3.0"
+  }
 }
