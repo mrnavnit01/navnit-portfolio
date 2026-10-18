@@ -230,7 +230,7 @@
             </svg>
           </button>
         </form>
-        <div class="navnit-ai-badge">Powered by Gemini AI • Click any link to visit live</div>
+        <div class="navnit-ai-badge"> ✦ Navnit AI • Click any link to visit live</div>
       </div>
     `;
 
