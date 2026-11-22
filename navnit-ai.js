@@ -355,7 +355,7 @@
     }
 
     // Show typing indicator
-    function showTyping indicator() {
+    function showTypingIndicator() {
       const indicator = document.createElement('div');
       indicator.className = 'navnit-ai-typing';
       indicator.id = 'navnitAiTyping';
