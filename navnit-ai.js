@@ -3,7 +3,7 @@
  * NAVNIT AI — CUTE & PREMIUM PORTFOLIO ASSISTANT (FRONTEND CLIENT)
  * ============================================================================
  * Self-contained, accessible, non-blocking floating chatbot client for Navnit Maurya.
- * Direct Client-Side Gemini Integration (No backend server required!)
+ * Direct Client-Side Gemini Integration with New AQ Header Authentication
  */
 
 (function () {
@@ -387,7 +387,8 @@
       showTypingIndicator();
 
       try {
-        const API_KEY = "AQ.Ab8RN6KxGLu5iaf1QeLwLb1BXAztySrvdq-Qnlfcc9DElOvmag";
+        // Aapki Google AI Studio Key
+        const API_KEY = "AQ.Ab8RN6KPpeFpQBbCNBRIUvDUf8WN8J4KcCmGn4el_phqqoV8_Q";
         
         // System prompt giving persona & knowledge base to Navnit AI
         const systemInstruction = `You are Navnit AI, the official, intelligent and friendly portfolio guide for Navnit Maurya.
@@ -412,10 +413,15 @@ Guide visitors to check out Navnit's works and hire or contact him for freelance
           });
         }
 
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`, {
+        // Endpoint with new Gemini 2.5 Flash model
+        const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
+
+        const response = await fetch(url, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'x-goog-api-key': API_KEY,
+            'Authorization': `Bearer ${API_KEY}`
           },
           body: JSON.stringify({ contents })
         });
