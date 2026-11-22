@@ -3,7 +3,7 @@
  * NAVNIT AI — CUTE & PREMIUM PORTFOLIO ASSISTANT (FRONTEND CLIENT)
  * ============================================================================
  * Self-contained, accessible, non-blocking floating chatbot client for Navnit Maurya.
- * Powered by Zero-Auth Free AI Engine (No API Key leaks, No OAuth Errors!)
+ * Powered by Zero-Auth Free AI Engine (Crisp, short & meaningful answers)
  */
 
 (function () {
@@ -78,7 +78,6 @@
   let chatHistory = [];
   const SESSION_STORAGE_KEY = 'navnit_ai_history_v1';
 
-  // Load from session storage if available
   try {
     const saved = sessionStorage.getItem(SESSION_STORAGE_KEY);
     if (saved) {
@@ -88,11 +87,10 @@
     chatHistory = [];
   }
 
-  // Safe Markdown Formatter (XSS-safe: escapes HTML, parses markdown to safe tags)
+  // Safe Markdown Formatter
   function formatMarkdown(text) {
     if (!text) return '';
 
-    // 1. HTML Escape
     let escaped = text
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
@@ -100,22 +98,12 @@
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#039;');
 
-    // 2. Bold: **text**
     escaped = escaped.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-
-    // 3. Italic: *text*
     escaped = escaped.replace(/\*(.*?)\*/g, '<em>$1</em>');
-
-    // 4. Inline code: `code`
     escaped = escaped.replace(/`([^`]+)`/g, '<code>$1</code>');
-
-    // 5. Links: [Label](https://...) -> safe external links with target="_blank"
     escaped = escaped.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1 ↗</a>');
-
-    // 6. Direct URLs: https://...
     escaped = escaped.replace(/(^|[^"])((https?:\/\/[^\s<]+))/g, '$1<a href="$2" target="_blank" rel="noopener noreferrer">$2 ↗</a>');
 
-    // 7. Bullet lists: lines starting with * or -
     const lines = escaped.split('\n');
     let inList = false;
     let formattedLines = [];
@@ -143,9 +131,7 @@
     return formattedLines.join('');
   }
 
-  // Build and inject Widget DOM
   function initWidget() {
-    // 1. Launcher Bubble
     const launcher = document.createElement('div');
     launcher.className = 'navnit-ai-launcher';
     launcher.id = 'navnitAiLauncher';
@@ -163,7 +149,6 @@
       </div>
     `;
 
-    // 2. Chat Panel
     const panel = document.createElement('div');
     panel.className = 'navnit-ai-panel';
     panel.id = 'navnitAiPanel';
@@ -199,16 +184,12 @@
 
       <!-- Chat Body / Messages -->
       <div class="navnit-ai-body" id="navnitAiBody">
-        <!-- Initial Greeting -->
         <div class="navnit-ai-msg assistant">
           <div class="navnit-ai-msg-avatar">
             ${MINI_AVATAR_SVG}
           </div>
           <div class="navnit-ai-msg-bubble">
-            <p>Hey there! 👋 I'm <strong>Navnit AI</strong>, your personal guide to Navnit's world of code, creativity &amp; projects! ✨</p>
-            <p style="margin-top:6px;font-size:0.83rem;color:rgba(255,255,255,0.75)">
-              Feel free to ask about Navnit's skills, live tools, background, or social links below!
-            </p>
+            <p>Hey there! 👋 I'm <strong>Navnit AI</strong>. Ask me anything about Navnit's projects, skills or contact details! ✨</p>
           </div>
         </div>
       </div>
@@ -220,7 +201,7 @@
             type="text"
             id="navnitAiInput"
             class="navnit-ai-input"
-            placeholder="Ask about Navnit's projects, skills..."
+            placeholder="Ask anything about Navnit..."
             autocomplete="off"
             maxlength="1000"
           />
@@ -238,7 +219,6 @@
     document.body.appendChild(launcher);
     document.body.appendChild(panel);
 
-    // Grab elements
     const bodyEl = document.getElementById('navnitAiBody');
     const inputEl = document.getElementById('navnitAiInput');
     const formEl = document.getElementById('navnitAiForm');
@@ -248,14 +228,12 @@
     const clearBtn = document.getElementById('navnitAiClearBtn');
     const pillsContainer = document.getElementById('navnitAiPills');
 
-    // Render any saved chat history from session
     if (chatHistory && chatHistory.length > 0) {
       chatHistory.forEach(msg => {
         appendMessage(msg.role, msg.content, false);
       });
     }
 
-    // Toggle Open/Close
     function openPanel() {
       panel.classList.remove('minimized');
       panel.classList.add('active');
@@ -285,7 +263,6 @@
     closeBtn.addEventListener('click', closePanel);
     minimizeBtn.addEventListener('click', toggleMinimize);
 
-    // Clear history
     clearBtn.addEventListener('click', () => {
       chatHistory = [];
       try { sessionStorage.removeItem(SESSION_STORAGE_KEY); } catch(e) {}
@@ -295,20 +272,18 @@
             ${MINI_AVATAR_SVG}
           </div>
           <div class="navnit-ai-msg-bubble">
-            <p>Chat cleared! 🧹 What else would you like to know about Navnit's work? ✨</p>
+            <p>Chat cleared! 🧹 What would you like to know next? ✨</p>
           </div>
         </div>
       `;
     });
 
-    // Close on Escape key
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && panel.classList.contains('active')) {
         closePanel();
       }
     });
 
-    // Quick suggestion pills click
     pillsContainer.addEventListener('click', (e) => {
       const pill = e.target.closest('.navnit-ai-pill');
       if (pill && pill.dataset.query) {
@@ -316,12 +291,10 @@
       }
     });
 
-    // Scroll chat to bottom
     function scrollToBottom() {
       bodyEl.scrollTop = bodyEl.scrollHeight;
     }
 
-    // Append a message bubble to the chat
     function appendMessage(role, text, save = true) {
       const msgDiv = document.createElement('div');
       msgDiv.className = `navnit-ai-msg ${role}`;
@@ -354,7 +327,6 @@
       }
     }
 
-    // Show typing indicator
     function showTypingIndicator() {
       const indicator = document.createElement('div');
       indicator.className = 'navnit-ai-typing';
@@ -373,7 +345,7 @@
       if (el) el.remove();
     }
 
-    // Send Message directly via Free Robust AI Engine (No Auth Required)
+    // Short & Crisp Reply Handler
     async function handleUserSend(rawText) {
       const message = rawText || inputEl.value.trim();
       if (!message) return;
@@ -381,25 +353,26 @@
       inputEl.value = '';
       appendMessage('user', message);
 
-      // Disable inputs during wait
       inputEl.disabled = true;
       sendBtn.disabled = true;
       showTypingIndicator();
 
       try {
-        const systemInstruction = `You are Navnit AI, the official, intelligent and friendly portfolio guide for Navnit Maurya.
-Navnit Maurya is a passionate Full-Stack Web Developer, UI/UX Designer, and AI tools creator.
-He builds modern web applications, interactive portfolios, utility tools, and works with JavaScript, React, Node.js, Python, CSS animations, and Gemini AI.
+        const systemInstruction = `You are Navnit AI, personal assistant for Navnit Maurya.
+Navnit is a BCA student & Full-Stack Web Developer, UI/UX Designer, and AI Creator.
+Skills: HTML, CSS, JavaScript, React, Node.js, Python, Cyber Bug Hunting, Photo/Video editing.
 GitHub: https://github.com/mrnavnit01
-Always be polite, enthusiastic, helpful, concise, and use formatting like bold text, bullet points, and emojis.
-Guide visitors to check out Navnit's works and hire or contact him for freelance projects!`;
+
+IMPORTANT RULES:
+1. Keep replies VERY SHORT, PRECISE, and TO-THE-POINT (maximum 2 to 3 lines or 3 small bullet points).
+2. DO NOT write long paragraphs or repetitive sentences.
+3. Be friendly and use relevant emojis. Answer directly without fluff.`;
 
         const messages = [
           { role: "system", content: systemInstruction }
         ];
 
-        // Append recent chat context
-        const recentHistory = chatHistory.slice(-6);
+        const recentHistory = chatHistory.slice(-4);
         for (const item of recentHistory) {
           messages.push({
             role: item.role === 'assistant' ? 'assistant' : 'user',
@@ -424,12 +397,12 @@ Guide visitors to check out Navnit's works and hire or contact him for freelance
         if (response.ok) {
           const replyText = await response.text();
           if (replyText && replyText.trim()) {
-            appendMessage('assistant', replyText);
+            appendMessage('assistant', replyText.trim());
           } else {
-            appendMessage('assistant', "Navnit AI is ready! Feel free to explore Navnit's projects or tech stack! ✨");
+            appendMessage('assistant', "Navnit Maurya is a Full-Stack Web Developer & UI Designer. Explore his projects on this page! 🚀");
           }
         } else {
-          appendMessage('assistant', "Navnit AI is ready! Feel free to ask about Navnit's projects or skills! ✨");
+          appendMessage('assistant', "Navnit AI is ready! Feel free to ask about his skills or projects! ✨");
         }
 
       } catch (err) {
@@ -437,7 +410,7 @@ Guide visitors to check out Navnit's works and hire or contact him for freelance
         console.error("AI Error:", err);
         appendMessage(
           'assistant',
-          "Oops! Could not connect right now. Please check your internet connection and try again! 🌐"
+          "Connection issue. Please try again! 🌐"
         );
       } finally {
         inputEl.disabled = false;
@@ -446,14 +419,12 @@ Guide visitors to check out Navnit's works and hire or contact him for freelance
       }
     }
 
-    // Form submit listener
     formEl.addEventListener('submit', (e) => {
       e.preventDefault();
       handleUserSend();
     });
   }
 
-  // Initialize once DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initWidget);
   } else {
