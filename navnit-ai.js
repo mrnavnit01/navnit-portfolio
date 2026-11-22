@@ -3,6 +3,7 @@
  * NAVNIT AI — CUTE & PREMIUM PORTFOLIO ASSISTANT (FRONTEND CLIENT)
  * ============================================================================
  * Self-contained, accessible, non-blocking floating chatbot client for Navnit Maurya.
+ * Direct Client-Side Gemini Integration (No backend server required!)
  */
 
 (function () {
@@ -372,7 +373,7 @@
       if (el) el.remove();
     }
 
-    // Send Message to Backend API
+    // Send Message directly to Gemini API
     async function handleUserSend(rawText) {
       const message = rawText || inputEl.value.trim();
       if (!message) return;
@@ -386,42 +387,59 @@
       showTypingIndicator();
 
       try {
-        const response = await fetch('/api/chat', {
+        const API_KEY = "AIzaSyCaU3XC2z5NsRvua7gBYwgBbK8dpHWeaZA";
+        
+        // System prompt giving persona & knowledge base to Navnit AI
+        const systemInstruction = `You are Navnit AI, the official, intelligent and friendly portfolio guide for Navnit Maurya.
+Navnit Maurya is a passionate Full-Stack Web Developer, UI/UX Designer, and AI tools creator.
+He builds modern web applications, interactive portfolios, utility tools, and works with JavaScript, React, Node.js, Python, CSS animations, and Gemini AI.
+GitHub: https://github.com/mrnavnit01
+Always be polite, enthusiastic, helpful, concise, and use formatting like bold text, bullet points, and emojis.
+Guide visitors to check out Navnit's works and hire or contact him for freelance projects!`;
+
+        // Format history for Gemini API
+        const contents = [
+          { role: 'user', parts: [{ text: systemInstruction }] },
+          { role: 'model', parts: [{ text: "Understood! I am Navnit AI, ready to assist visitors regarding Navnit Maurya's portfolio, skills, projects, and contact info." }] }
+        ];
+
+        // Add recent chat context
+        const recentHistory = chatHistory.slice(-6);
+        for (const item of recentHistory) {
+          contents.push({
+            role: item.role === 'assistant' ? 'model' : 'user',
+            parts: [{ text: item.content }]
+          });
+        }
+
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({
-            message: message,
-            history: chatHistory.slice(-10).map(m => ({
-              role: m.role === 'assistant' ? 'model' : 'user',
-              content: m.content
-            }))
-          })
+          body: JSON.stringify({ contents })
         });
 
         removeTypingIndicator();
 
-        if (!response.ok) {
-          const errData = await response.json().catch(() => ({}));
-          const errMsg = errData.error || `Server responded with error ${response.status}`;
-          appendMessage('assistant', `⚠️ ${errMsg}`);
-          return;
-        }
-
         const data = await response.json();
-        if (data && data.success && data.reply) {
-          appendMessage('assistant', data.reply);
+
+        if (data && data.candidates && data.candidates[0]?.content?.parts[0]?.text) {
+          const replyText = data.candidates[0].content.parts[0].text;
+          appendMessage('assistant', replyText);
+        } else if (data && data.error) {
+          console.error("Gemini Error:", data.error);
+          appendMessage('assistant', `⚠️ AI Error: ${data.error.message || 'Unable to respond right now.'}`);
         } else {
-          appendMessage('assistant', data.error || "Sorry, I couldn't generate a response. Please try again! ✨");
+          appendMessage('assistant', "Navnit AI is ready! Feel free to ask about Navnit's projects or skills! ✨");
         }
 
       } catch (err) {
         removeTypingIndicator();
-        // Friendly offline or connection error message
+        console.error(err);
         appendMessage(
           'assistant',
-          "Hmm, I couldn't connect to the server backend. 📡 If running locally, make sure you started `node server.js` with your `GEMINI_API_KEY`. You can also explore Navnit's works directly on this page!"
+          "Oops! Could not connect right now. Please check your internet connection and try again! 🌐"
         );
       } finally {
         inputEl.disabled = false;
