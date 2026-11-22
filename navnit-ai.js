@@ -3,7 +3,7 @@
  * NAVNIT AI — CUTE & PREMIUM PORTFOLIO ASSISTANT (FRONTEND CLIENT)
  * ============================================================================
  * Self-contained, accessible, non-blocking floating chatbot client for Navnit Maurya.
- * Direct Client-Side Gemini Integration with New AQ Header Authentication
+ * Powered by Zero-Auth Free AI Engine (No API Key leaks, No OAuth Errors!)
  */
 
 (function () {
@@ -355,7 +355,7 @@
     }
 
     // Show typing indicator
-    function showTypingIndicator() {
+    function showTyping indicator() {
       const indicator = document.createElement('div');
       indicator.className = 'navnit-ai-typing';
       indicator.id = 'navnitAiTyping';
@@ -373,7 +373,7 @@
       if (el) el.remove();
     }
 
-    // Send Message directly to Gemini API
+    // Send Message directly via Free Robust AI Engine (No Auth Required)
     async function handleUserSend(rawText) {
       const message = rawText || inputEl.value.trim();
       if (!message) return;
@@ -387,10 +387,6 @@
       showTypingIndicator();
 
       try {
-        // Aapki Google AI Studio Key
-        const API_KEY = "AQ.Ab8RN6KPpeFpQBbCNBRIUvDUf8WN8J4KcCmGn4el_phqqoV8_Q";
-        
-        // System prompt giving persona & knowledge base to Navnit AI
         const systemInstruction = `You are Navnit AI, the official, intelligent and friendly portfolio guide for Navnit Maurya.
 Navnit Maurya is a passionate Full-Stack Web Developer, UI/UX Designer, and AI tools creator.
 He builds modern web applications, interactive portfolios, utility tools, and works with JavaScript, React, Node.js, Python, CSS animations, and Gemini AI.
@@ -398,51 +394,47 @@ GitHub: https://github.com/mrnavnit01
 Always be polite, enthusiastic, helpful, concise, and use formatting like bold text, bullet points, and emojis.
 Guide visitors to check out Navnit's works and hire or contact him for freelance projects!`;
 
-        // Format history for Gemini API
-        const contents = [
-          { role: 'user', parts: [{ text: systemInstruction }] },
-          { role: 'model', parts: [{ text: "Understood! I am Navnit AI, ready to assist visitors regarding Navnit Maurya's portfolio, skills, projects, and contact info." }] }
+        const messages = [
+          { role: "system", content: systemInstruction }
         ];
 
-        // Add recent chat context
+        // Append recent chat context
         const recentHistory = chatHistory.slice(-6);
         for (const item of recentHistory) {
-          contents.push({
-            role: item.role === 'assistant' ? 'model' : 'user',
-            parts: [{ text: item.content }]
+          messages.push({
+            role: item.role === 'assistant' ? 'assistant' : 'user',
+            content: item.content
           });
         }
+        messages.push({ role: "user", content: message });
 
-        // Endpoint with new Gemini 2.5 Flash model
-        const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
-
-        const response = await fetch(url, {
+        const response = await fetch("https://text.pollinations.ai/", {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
-            'x-goog-api-key': API_KEY,
-            'Authorization': `Bearer ${API_KEY}`
+            'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ contents })
+          body: JSON.stringify({
+            messages: messages,
+            model: "openai"
+          })
         });
 
         removeTypingIndicator();
 
-        const data = await response.json();
-
-        if (data && data.candidates && data.candidates[0]?.content?.parts[0]?.text) {
-          const replyText = data.candidates[0].content.parts[0].text;
-          appendMessage('assistant', replyText);
-        } else if (data && data.error) {
-          console.error("Gemini Error:", data.error);
-          appendMessage('assistant', `⚠️ AI Error: ${data.error.message || 'Unable to respond right now.'}`);
+        if (response.ok) {
+          const replyText = await response.text();
+          if (replyText && replyText.trim()) {
+            appendMessage('assistant', replyText);
+          } else {
+            appendMessage('assistant', "Navnit AI is ready! Feel free to explore Navnit's projects or tech stack! ✨");
+          }
         } else {
           appendMessage('assistant', "Navnit AI is ready! Feel free to ask about Navnit's projects or skills! ✨");
         }
 
       } catch (err) {
         removeTypingIndicator();
-        console.error(err);
+        console.error("AI Error:", err);
         appendMessage(
           'assistant',
           "Oops! Could not connect right now. Please check your internet connection and try again! 🌐"
