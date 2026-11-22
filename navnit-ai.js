@@ -387,7 +387,7 @@
       showTypingIndicator();
 
       try {
-        const API_KEY = "AQ.Ab8RN6IGJfpPoePfbFidzt2nNhtgm4EjxcCfIk8_1Ky5QtTLHw";
+        const API_KEY = "AQ.Ab8RN6KxGLu5iaf1QeLwLb1BXAztySrvdq-Qnlfcc9DElOvmag";
         
         // System prompt giving persona & knowledge base to Navnit AI
         const systemInstruction = `You are Navnit AI, the official, intelligent and friendly portfolio guide for Navnit Maurya.
