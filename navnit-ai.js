@@ -1,62 +1,12 @@
 /**
  * ============================================================================
- * NAVNIT AI — ULTRA FAST PERSONAL PORTFOLIO ASSISTANT
+ * NAVNIT AI — SMART NEURAL PORTFOLIO ASSISTANT (POWERED BY REAL AI)
  * ============================================================================
- * Dedicated exclusively to Navnit Maurya & his portfolio with instant replies!
+ * Intelligent, context-aware chatbot for Navnit Maurya.
  */
 
 (function () {
   'use strict';
-
-  // Verified Knowledge Base of Navnit Maurya
-  const NAVNIT_DATA = {
-    name: "Navnit Maurya",
-    title: "Digital Creator & Tech Explorer",
-    bio: "Passionate Full-Stack Developer, UI/UX Designer, Video Editor & Bug Hunter from India. Currently pursuing BCA 2nd Year at VBSPU.",
-    instagram: {
-      handle: "@mr.navnit.01",
-      url: "https://instagram.com/mr.navnit.01"
-    },
-    github: {
-      handle: "mrnavnit01",
-      url: "https://github.com/mrnavnit01"
-    },
-    linkedin: {
-      handle: "mrnavnit01",
-      url: "https://linkedin.com/in/mrnavnit01"
-    },
-    email: "navnitmaurya60@gmail.com",
-    portfolioUrl: "https://navnit-tech.onrender.com",
-    skills: [
-      "AI Website Development & Frontend (HTML5, CSS3, JavaScript, Canvas Animations)",
-      "Photo Editing & Manipulation (Photoshop, Lightroom)",
-      "Cinematic Video Editing & AI Video Generation (Premiere Pro, CapCut, Runway AI)",
-      "Prompt Engineering & LLM Customization",
-      "Bug Hunting & Web Security (OWASP Top 10, Burp Suite)"
-    ],
-    projects: [
-      {
-        name: "Navnit Tools Suite",
-        desc: "6-in-1 browser utilities (Bg Remover, JPG to PDF, Image Compressor, Password Gen, QR Gen).",
-        link: "https://navnit-tools-suite.onrender.com/"
-      },
-      {
-        name: "BCA Hub",
-        desc: "Study portal with notes, 24 developer tools, and practical code solutions for BCA students.",
-        link: "https://navnit-bca-hub.onrender.com/"
-      },
-      {
-        name: "AI Background Remover",
-        desc: "Instant client-side image background remover with futuristic UI.",
-        link: "https://navnit-bg-remover.onrender.com/"
-      },
-      {
-        name: "Interactive 60FPS Portfolio",
-        desc: "240-frame smooth canvas scroll sequence portfolio with Navnit AI assistant.",
-        link: "https://navnit-tech.onrender.com/"
-      }
-    ]
-  };
 
   // Cute Mascot SVG
   const MASCOT_SVG = `
@@ -100,12 +50,12 @@
   `;
 
   const QUICK_PROMPTS = [
-    { label: "About Navnit 👋", query: "Tell me about Navnit Maurya" },
-    { label: "Instagram 📸", query: "What is Navnit's Instagram ID?" },
+    { label: "About Navnit 👋", query: "Tell me about Navnit Maurya and what he does." },
+    { label: "Instagram 📸", query: "Share Navnit's Instagram ID" },
     { label: "Projects 🚀", query: "What projects has Navnit built?" },
     { label: "Skills 💻", query: "What are Navnit's key skills?" },
-    { label: "GitHub 🔗", query: "Share Navnit's GitHub profile" },
-    { label: "Contact ✉️", query: "How to contact or hire Navnit?" }
+    { label: "GitHub 🔗", query: "Where is Navnit's GitHub profile?" },
+    { label: "Contact ✉️", query: "How can I contact or hire Navnit?" }
   ];
 
   let chatHistory = [];
@@ -157,52 +107,6 @@
     return formattedLines.join('');
   }
 
-  // Instant Knowledge Matcher (Zero-latency instant responses)
-  function getInstantAnswer(query) {
-    const q = query.toLowerCase();
-
-    // Instagram check
-    if (q.includes('insta') || q.includes('instagram') || q.includes('ig')) {
-      return `📸 **Navnit's Instagram:**\nConnect with him on Instagram: [${NAVNIT_DATA.instagram.handle}](${NAVNIT_DATA.instagram.url})\nFeel free to DM him there! ✨`;
-    }
-
-    // GitHub check
-    if (q.includes('github') || q.includes('git') || q.includes('repo')) {
-      return `🐙 **Navnit's GitHub:**\nExplore all his open-source code & repositories here: [github.com/${NAVNIT_DATA.github.handle}](${NAVNIT_DATA.github.url}) 🚀`;
-    }
-
-    // LinkedIn check
-    if (q.includes('linkedin')) {
-      return `💼 **Navnit's LinkedIn:**\nConnect professionally with Navnit: [linkedin.com/in/${NAVNIT_DATA.linkedin.handle}](${NAVNIT_DATA.linkedin.url}) 🌐`;
-    }
-
-    // Contact / Email / Hire check
-    if (q.includes('contact') || q.includes('email') || q.includes('hire') || q.includes('mail') || q.includes('message')) {
-      return `✉️ **Contact Navnit Maurya:**\n• Email: [${NAVNIT_DATA.email}](mailto:${NAVNIT_DATA.email})\n• Instagram: [${NAVNIT_DATA.instagram.handle}](${NAVNIT_DATA.instagram.url})\n• Or click the **Contact Me** button on this page to send a direct message! 🤝`;
-    }
-
-    // Projects check
-    if (q.includes('project') || q.includes('work') || q.includes('tools') || q.includes('portfolio') || q.includes('bca hub')) {
-      return `🚀 **Navnit's Live Projects:**\n\n` +
-        NAVNIT_DATA.projects.map(p => `• [**${p.name}**](${p.link}): ${p.desc}`).join('\n\n') +
-        `\n\nClick any project link above to visit live! ✨`;
-    }
-
-    // Skills check
-    if (q.includes('skill') || q.includes('tech') || q.includes('stack') || q.includes('capable') || q.includes('know')) {
-      return `💻 **Navnit's Core Skills:**\n\n` +
-        NAVNIT_DATA.skills.map(s => `• ${s}`).join('\n') +
-        `\n\nPassionate about building fast AI tools & modern web experiences! 🔥`;
-    }
-
-    // About / Bio check
-    if (q.includes('about') || q.includes('who is') || q.includes('navnit maurya') || q.includes('kya karta')) {
-      return `👋 **About Navnit Maurya:**\n**${NAVNIT_DATA.title}** from India (BCA 2nd Year, VBSPU).\nHe creates AI web apps, cinematic edits, and security tools.\n\n🔗 Links: [Instagram](${NAVNIT_DATA.instagram.url}) • [GitHub](${NAVNIT_DATA.github.url}) • [Email](mailto:${NAVNIT_DATA.email})`;
-    }
-
-    return null;
-  }
-
   function initWidget() {
     const launcher = document.createElement('div');
     launcher.className = 'navnit-ai-launcher';
@@ -250,7 +154,7 @@
         <div class="navnit-ai-msg assistant">
           <div class="navnit-ai-msg-avatar">${MINI_AVATAR_SVG}</div>
           <div class="navnit-ai-msg-bubble">
-            <p>Hey there! 👋 I'm <strong>Navnit AI</strong>. Ask me anything about Navnit Maurya, his live projects, skills, or social links! ✨</p>
+            <p>Hey there! 👋 I'm <strong>Navnit AI</strong>. Ask me anything about Navnit Maurya, his projects, skills, or social links! ✨</p>
           </div>
         </div>
       </div>
@@ -261,7 +165,7 @@
             type="text"
             id="navnitAiInput"
             class="navnit-ai-input"
-            placeholder="Ask about Navnit's Instagram, projects, skills..."
+            placeholder="Ask anything about Navnit..."
             autocomplete="off"
             maxlength="1000"
           />
@@ -389,7 +293,7 @@
       if (el) el.remove();
     }
 
-    // High Speed Intelligent Handler
+    // REAL AI CALL WITH KNOWLEDGE CONTEXT
     async function handleUserSend(rawText) {
       const message = rawText || inputEl.value.trim();
       if (!message) return;
@@ -397,53 +301,52 @@
       inputEl.value = '';
       appendMessage('user', message);
 
-      // Check instant match first (0ms latency, always 100% accurate)
-      const instantReply = getInstantAnswer(message);
-      if (instantReply) {
-        appendMessage('assistant', instantReply);
-        return;
-      }
-
       inputEl.disabled = true;
       sendBtn.disabled = true;
       showTypingIndicator();
 
-      try {
-        const systemPrompt = `You are Navnit AI, exclusive assistant for Navnit Maurya's portfolio.
-Information about Navnit:
-• Full Name: Navnit Maurya (Digital Creator, Full-Stack Developer, Bug Hunter)
-• Education: BCA 2nd Year, VBSPU
-• Instagram: https://instagram.com/mr.navnit.01 (@mr.navnit.01)
-• GitHub: https://github.com/mrnavnit01
-• LinkedIn: https://linkedin.com/in/mrnavnit01
-• Email: navnitmaurya60@gmail.com
-• Live Projects: Navnit Tools Suite, BCA Hub, AI Bg Remover, 60FPS Portfolio
-Rule: Always provide concise, friendly, 2-line answers with emojis and verified links. Always share his Instagram or GitHub when asked!`;
+      const systemPrompt = `You are Navnit AI (🤖💜), personal AI assistant for Navnit Maurya.
+Respond naturally to greetings (e.g., if user says "aur bhai", say "Badhiya bhai! Batao Navnit ke baare mein kya janna chahte ho? 😊").
 
-        const response = await fetch("https://text.pollinations.ai/", {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            messages: [
-              { role: "system", content: systemPrompt },
-              { role: "user", content: message }
-            ],
-            model: "mistral"
-          })
-        });
+=== ABOUT NAVNIT MAURYA ===
+- Profession: Digital Creator, Full-Stack Web Developer, UI/UX Designer & Ethical Bug Hunter
+- Education: BCA 2nd Year at VBSPU University, India
+- Instagram: [@mr.navnit.01](https://instagram.com/mr.navnit.01) (ALWAYS give this link when user asks for Insta!)
+- GitHub: [github.com/mrnavnit01](https://github.com/mrnavnit01)
+- LinkedIn: [linkedin.com/in/mrnavnit01](https://linkedin.com/in/mrnavnit01)
+- Email: [navnitmaurya60@gmail.com](mailto:navnitmaurya60@gmail.com)
+- Portfolio: [navnit-tech.onrender.com](https://navnit-tech.onrender.com)
+
+=== PROJECTS ===
+1. [Navnit Tools Suite](https://navnit-tools-suite.onrender.com/) - 6-in-1 browser tools (Bg remover, PDF, compressor)
+2. [BCA Hub](https://navnit-bca-hub.onrender.com/) - Academic study portal for BCA students
+3. [AI Bg Remover](https://navnit-bg-remover.onrender.com/) - Instant AI image background remover
+
+=== RULES ===
+1. Keep replies SHORT & CRISP (max 2-3 lines or bullet points).
+2. Answer in the same language as user (Hindi, Hinglish, or English).
+3. Always provide real links when asked for Instagram, GitHub, or Projects.`;
+
+      try {
+        // Direct reliable AI request
+        const res = await fetch("https://text.pollinations.ai/" + encodeURIComponent(message) + "?system=" + encodeURIComponent(systemPrompt) + "&model=mistral");
 
         removeTypingIndicator();
 
-        if (response.ok) {
-          const reply = await response.text();
-          appendMessage('assistant', reply.trim());
+        if (res.ok) {
+          const reply = await res.text();
+          if (reply && reply.trim()) {
+            appendMessage('assistant', reply.trim());
+          } else {
+            appendMessage('assistant', "Main Navnit ka AI assistant hoon! Bataiye unke projects ya social links ke baare mein kya janna hai? ✨");
+          }
         } else {
-          appendMessage('assistant', `Navnit Maurya is a Digital Creator & Developer! Connect with him on Instagram: [${NAVNIT_DATA.instagram.handle}](${NAVNIT_DATA.instagram.url}) ✨`);
+          appendMessage('assistant', "Navnit Maurya ek Full-Stack Developer aur Creator hain! Unka Instagram: [@mr.navnit.01](https://instagram.com/mr.navnit.01) check karein! 🚀");
         }
-
       } catch (err) {
         removeTypingIndicator();
-        appendMessage('assistant', `Reach out to Navnit on Instagram: [${NAVNIT_DATA.instagram.handle}](${NAVNIT_DATA.instagram.url}) or GitHub: [${NAVNIT_DATA.github.handle}](${NAVNIT_DATA.github.url})! 🚀`);
+        console.error("AI error:", err);
+        appendMessage('assistant', "Navnit Maurya se connect karne ke liye unka Instagram [@mr.navnit.01](https://instagram.com/mr.navnit.01) check karein! ✨");
       } finally {
         inputEl.disabled = false;
         sendBtn.disabled = false;
