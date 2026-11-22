@@ -1,15 +1,64 @@
 /**
  * ============================================================================
- * NAVNIT AI — CUTE & PREMIUM PORTFOLIO ASSISTANT (FRONTEND CLIENT)
+ * NAVNIT AI — ULTRA FAST PERSONAL PORTFOLIO ASSISTANT
  * ============================================================================
- * Self-contained, accessible, non-blocking floating chatbot client for Navnit Maurya.
- * Powered by Zero-Auth Free AI Engine (Crisp, short & meaningful answers)
+ * Dedicated exclusively to Navnit Maurya & his portfolio with instant replies!
  */
 
 (function () {
   'use strict';
 
-  // SVG for Cute Robot Mascot (Friendly curved eyes, glowing antenna, pink cheeks)
+  // Verified Knowledge Base of Navnit Maurya
+  const NAVNIT_DATA = {
+    name: "Navnit Maurya",
+    title: "Digital Creator & Tech Explorer",
+    bio: "Passionate Full-Stack Developer, UI/UX Designer, Video Editor & Bug Hunter from India. Currently pursuing BCA 2nd Year at VBSPU.",
+    instagram: {
+      handle: "@mr.navnit.01",
+      url: "https://instagram.com/mr.navnit.01"
+    },
+    github: {
+      handle: "mrnavnit01",
+      url: "https://github.com/mrnavnit01"
+    },
+    linkedin: {
+      handle: "mrnavnit01",
+      url: "https://linkedin.com/in/mrnavnit01"
+    },
+    email: "navnitmaurya60@gmail.com",
+    portfolioUrl: "https://navnit-tech.onrender.com",
+    skills: [
+      "AI Website Development & Frontend (HTML5, CSS3, JavaScript, Canvas Animations)",
+      "Photo Editing & Manipulation (Photoshop, Lightroom)",
+      "Cinematic Video Editing & AI Video Generation (Premiere Pro, CapCut, Runway AI)",
+      "Prompt Engineering & LLM Customization",
+      "Bug Hunting & Web Security (OWASP Top 10, Burp Suite)"
+    ],
+    projects: [
+      {
+        name: "Navnit Tools Suite",
+        desc: "6-in-1 browser utilities (Bg Remover, JPG to PDF, Image Compressor, Password Gen, QR Gen).",
+        link: "https://navnit-tools-suite.onrender.com/"
+      },
+      {
+        name: "BCA Hub",
+        desc: "Study portal with notes, 24 developer tools, and practical code solutions for BCA students.",
+        link: "https://navnit-bca-hub.onrender.com/"
+      },
+      {
+        name: "AI Background Remover",
+        desc: "Instant client-side image background remover with futuristic UI.",
+        link: "https://navnit-bg-remover.onrender.com/"
+      },
+      {
+        name: "Interactive 60FPS Portfolio",
+        desc: "240-frame smooth canvas scroll sequence portfolio with Navnit AI assistant.",
+        link: "https://navnit-tech.onrender.com/"
+      }
+    ]
+  };
+
+  // Cute Mascot SVG
   const MASCOT_SVG = `
     <svg viewBox="0 0 100 100" class="navnit-ai-mascot-svg" xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -30,35 +79,20 @@
           </feMerge>
         </filter>
       </defs>
-
-      <!-- Antenna -->
       <line x1="50" y1="18" x2="50" y2="7" stroke="#e5c158" stroke-width="3.5" stroke-linecap="round"/>
       <circle cx="50" cy="6" r="5" fill="#00f2fe" filter="url(#eyeGlow)"/>
-
-      <!-- Robot Ears / Headphones -->
       <rect x="14" y="38" width="8" height="24" rx="4" fill="#00f2fe"/>
       <rect x="78" y="38" width="8" height="24" rx="4" fill="#00f2fe"/>
-
-      <!-- Robot Head Base -->
       <rect x="20" y="18" width="60" height="62" rx="18" fill="url(#robotBodyGrad)" stroke="#e5c158" stroke-width="2.5"/>
-
-      <!-- Glossy Visor Screen -->
       <rect x="27" y="27" width="46" height="38" rx="12" fill="url(#visorGrad)" stroke="rgba(0, 242, 254, 0.4)" stroke-width="1.5"/>
-
-      <!-- Cute Glowing Cyan Eyes (Happy Curves) -->
       <path d="M 36 44 Q 41 38 46 44" stroke="#00f2fe" stroke-width="3.8" stroke-linecap="round" fill="none" filter="url(#eyeGlow)"/>
       <path d="M 54 44 Q 59 38 64 44" stroke="#00f2fe" stroke-width="3.8" stroke-linecap="round" fill="none" filter="url(#eyeGlow)"/>
-
-      <!-- Cute Blushing Pink Cheeks -->
       <circle cx="33" cy="53" r="3.5" fill="#ff69b4" opacity="0.85"/>
       <circle cx="67" cy="53" r="3.5" fill="#ff69b4" opacity="0.85"/>
-
-      <!-- Cute Smile -->
       <path d="M 45 54 Q 50 58 55 54" stroke="#e5c158" stroke-width="2.2" stroke-linecap="round" fill="none"/>
     </svg>
   `;
 
-  // Mini Avatar SVG for messages
   const MINI_AVATAR_SVG = `
     <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#9d4edd,#00f2fe);padding:2px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 10px rgba(157,78,221,0.5)">
       ${MASCOT_SVG.replace('width="42"', 'width="24"').replace('height="42"', 'height="24"')}
@@ -66,31 +100,26 @@
   `;
 
   const QUICK_PROMPTS = [
-    { label: "About Navnit 👋", query: "Tell me about Navnit Maurya and what he does." },
-    { label: "Explore Projects 🚀", query: "What projects has Navnit built? Show me his live works and tools!" },
-    { label: "Tech Stack 💻", query: "What are Navnit's key skills and technical capabilities?" },
-    { label: "GitHub 🔗", query: "Where can I find Navnit's GitHub profile and repositories?" },
-    { label: "Social Profiles 🌐", query: "What are Navnit's Instagram, LinkedIn, and social profiles?" },
-    { label: "Hire / Contact ✉️", query: "How can I contact or hire Navnit for projects?" }
+    { label: "About Navnit 👋", query: "Tell me about Navnit Maurya" },
+    { label: "Instagram 📸", query: "What is Navnit's Instagram ID?" },
+    { label: "Projects 🚀", query: "What projects has Navnit built?" },
+    { label: "Skills 💻", query: "What are Navnit's key skills?" },
+    { label: "GitHub 🔗", query: "Share Navnit's GitHub profile" },
+    { label: "Contact ✉️", query: "How to contact or hire Navnit?" }
   ];
 
-  // Store session history
   let chatHistory = [];
   const SESSION_STORAGE_KEY = 'navnit_ai_history_v1';
 
   try {
     const saved = sessionStorage.getItem(SESSION_STORAGE_KEY);
-    if (saved) {
-      chatHistory = JSON.parse(saved);
-    }
+    if (saved) chatHistory = JSON.parse(saved);
   } catch (e) {
     chatHistory = [];
   }
 
-  // Safe Markdown Formatter
   function formatMarkdown(text) {
     if (!text) return '';
-
     let escaped = text
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
@@ -121,14 +150,57 @@
           formattedLines.push('</ul>');
           inList = false;
         }
-        if (trimmed) {
-          formattedLines.push(`<p>${line}</p>`);
-        }
+        if (trimmed) formattedLines.push(`<p>${line}</p>`);
       }
     }
     if (inList) formattedLines.push('</ul>');
-
     return formattedLines.join('');
+  }
+
+  // Instant Knowledge Matcher (Zero-latency instant responses)
+  function getInstantAnswer(query) {
+    const q = query.toLowerCase();
+
+    // Instagram check
+    if (q.includes('insta') || q.includes('instagram') || q.includes('ig')) {
+      return `📸 **Navnit's Instagram:**\nConnect with him on Instagram: [${NAVNIT_DATA.instagram.handle}](${NAVNIT_DATA.instagram.url})\nFeel free to DM him there! ✨`;
+    }
+
+    // GitHub check
+    if (q.includes('github') || q.includes('git') || q.includes('repo')) {
+      return `🐙 **Navnit's GitHub:**\nExplore all his open-source code & repositories here: [github.com/${NAVNIT_DATA.github.handle}](${NAVNIT_DATA.github.url}) 🚀`;
+    }
+
+    // LinkedIn check
+    if (q.includes('linkedin')) {
+      return `💼 **Navnit's LinkedIn:**\nConnect professionally with Navnit: [linkedin.com/in/${NAVNIT_DATA.linkedin.handle}](${NAVNIT_DATA.linkedin.url}) 🌐`;
+    }
+
+    // Contact / Email / Hire check
+    if (q.includes('contact') || q.includes('email') || q.includes('hire') || q.includes('mail') || q.includes('message')) {
+      return `✉️ **Contact Navnit Maurya:**\n• Email: [${NAVNIT_DATA.email}](mailto:${NAVNIT_DATA.email})\n• Instagram: [${NAVNIT_DATA.instagram.handle}](${NAVNIT_DATA.instagram.url})\n• Or click the **Contact Me** button on this page to send a direct message! 🤝`;
+    }
+
+    // Projects check
+    if (q.includes('project') || q.includes('work') || q.includes('tools') || q.includes('portfolio') || q.includes('bca hub')) {
+      return `🚀 **Navnit's Live Projects:**\n\n` +
+        NAVNIT_DATA.projects.map(p => `• [**${p.name}**](${p.link}): ${p.desc}`).join('\n\n') +
+        `\n\nClick any project link above to visit live! ✨`;
+    }
+
+    // Skills check
+    if (q.includes('skill') || q.includes('tech') || q.includes('stack') || q.includes('capable') || q.includes('know')) {
+      return `💻 **Navnit's Core Skills:**\n\n` +
+        NAVNIT_DATA.skills.map(s => `• ${s}`).join('\n') +
+        `\n\nPassionate about building fast AI tools & modern web experiences! 🔥`;
+    }
+
+    // About / Bio check
+    if (q.includes('about') || q.includes('who is') || q.includes('navnit maurya') || q.includes('kya karta')) {
+      return `👋 **About Navnit Maurya:**\n**${NAVNIT_DATA.title}** from India (BCA 2nd Year, VBSPU).\nHe creates AI web apps, cinematic edits, and security tools.\n\n🔗 Links: [Instagram](${NAVNIT_DATA.instagram.url}) • [GitHub](${NAVNIT_DATA.github.url}) • [Email](mailto:${NAVNIT_DATA.email})`;
+    }
+
+    return null;
   }
 
   function initWidget() {
@@ -137,11 +209,10 @@
     launcher.id = 'navnitAiLauncher';
     launcher.setAttribute('role', 'button');
     launcher.setAttribute('tabindex', '0');
-    launcher.setAttribute('aria-label', 'Open Navnit AI Assistant');
     launcher.innerHTML = `
       <div class="navnit-ai-mascot-wrapper">
         ${MASCOT_SVG}
-        <span class="navnit-ai-online-dot" title="Navnit AI Online"></span>
+        <span class="navnit-ai-online-dot"></span>
       </div>
       <div class="navnit-ai-label">
         <span class="navnit-ai-name">Navnit AI <span class="navnit-ai-sparkle">✨</span></span>
@@ -153,14 +224,10 @@
     panel.className = 'navnit-ai-panel';
     panel.id = 'navnitAiPanel';
     panel.setAttribute('role', 'dialog');
-    panel.setAttribute('aria-label', 'Navnit AI Chat Window');
     panel.innerHTML = `
-      <!-- Header -->
       <div class="navnit-ai-header">
         <div class="navnit-ai-header-left">
-          <div class="navnit-ai-header-mascot">
-            ${MASCOT_SVG}
-          </div>
+          <div class="navnit-ai-header-mascot">${MASCOT_SVG}</div>
           <div class="navnit-ai-header-info">
             <span class="navnit-ai-header-title">Navnit AI <span style="font-size:0.75rem;color:#e5c158">🤖💜</span></span>
             <span class="navnit-ai-header-status">
@@ -169,43 +236,36 @@
           </div>
         </div>
         <div class="navnit-ai-header-actions">
-          <button class="navnit-ai-btn-ctrl" id="navnitAiMinimizeBtn" title="Minimize Chat" aria-label="Minimize Chat">—</button>
-          <button class="navnit-ai-btn-ctrl" id="navnitAiClearBtn" title="Clear Chat History" aria-label="Clear Chat History">🗑️</button>
-          <button class="navnit-ai-btn-ctrl" id="navnitAiCloseBtn" title="Close Chat" aria-label="Close Chat">✕</button>
+          <button class="navnit-ai-btn-ctrl" id="navnitAiMinimizeBtn" title="Minimize">—</button>
+          <button class="navnit-ai-btn-ctrl" id="navnitAiClearBtn" title="Clear">🗑️</button>
+          <button class="navnit-ai-btn-ctrl" id="navnitAiCloseBtn" title="Close">✕</button>
         </div>
       </div>
 
-      <!-- Quick Suggestion Pills -->
       <div class="navnit-ai-quick-pills" id="navnitAiPills">
-        ${QUICK_PROMPTS.map(p => `
-          <button class="navnit-ai-pill" data-query="${p.query}">${p.label}</button>
-        `).join('')}
+        ${QUICK_PROMPTS.map(p => `<button class="navnit-ai-pill" data-query="${p.query}">${p.label}</button>`).join('')}
       </div>
 
-      <!-- Chat Body / Messages -->
       <div class="navnit-ai-body" id="navnitAiBody">
         <div class="navnit-ai-msg assistant">
-          <div class="navnit-ai-msg-avatar">
-            ${MINI_AVATAR_SVG}
-          </div>
+          <div class="navnit-ai-msg-avatar">${MINI_AVATAR_SVG}</div>
           <div class="navnit-ai-msg-bubble">
-            <p>Hey there! 👋 I'm <strong>Navnit AI</strong>. Ask me anything about Navnit's projects, skills or contact details! ✨</p>
+            <p>Hey there! 👋 I'm <strong>Navnit AI</strong>. Ask me anything about Navnit Maurya, his live projects, skills, or social links! ✨</p>
           </div>
         </div>
       </div>
 
-      <!-- Footer / Input Form -->
       <div class="navnit-ai-footer">
         <form class="navnit-ai-input-form" id="navnitAiForm">
           <input
             type="text"
             id="navnitAiInput"
             class="navnit-ai-input"
-            placeholder="Ask anything about Navnit..."
+            placeholder="Ask about Navnit's Instagram, projects, skills..."
             autocomplete="off"
             maxlength="1000"
           />
-          <button type="submit" id="navnitAiSendBtn" class="navnit-ai-send-btn" title="Send message" aria-label="Send message">
+          <button type="submit" id="navnitAiSendBtn" class="navnit-ai-send-btn" title="Send message">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <line x1="22" y1="2" x2="11" y2="13"></line>
               <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
@@ -229,9 +289,7 @@
     const pillsContainer = document.getElementById('navnitAiPills');
 
     if (chatHistory && chatHistory.length > 0) {
-      chatHistory.forEach(msg => {
-        appendMessage(msg.role, msg.content, false);
-      });
+      chatHistory.forEach(msg => appendMessage(msg.role, msg.content, false));
     }
 
     function openPanel() {
@@ -268,20 +326,12 @@
       try { sessionStorage.removeItem(SESSION_STORAGE_KEY); } catch(e) {}
       bodyEl.innerHTML = `
         <div class="navnit-ai-msg assistant">
-          <div class="navnit-ai-msg-avatar">
-            ${MINI_AVATAR_SVG}
-          </div>
+          <div class="navnit-ai-msg-avatar">${MINI_AVATAR_SVG}</div>
           <div class="navnit-ai-msg-bubble">
             <p>Chat cleared! 🧹 What would you like to know next? ✨</p>
           </div>
         </div>
       `;
-    });
-
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && panel.classList.contains('active')) {
-        closePanel();
-      }
     });
 
     pillsContainer.addEventListener('click', (e) => {
@@ -301,18 +351,12 @@
 
       if (role === 'assistant') {
         msgDiv.innerHTML = `
-          <div class="navnit-ai-msg-avatar">
-            ${MINI_AVATAR_SVG}
-          </div>
-          <div class="navnit-ai-msg-bubble">
-            ${formatMarkdown(text)}
-          </div>
+          <div class="navnit-ai-msg-avatar">${MINI_AVATAR_SVG}</div>
+          <div class="navnit-ai-msg-bubble">${formatMarkdown(text)}</div>
         `;
       } else {
         msgDiv.innerHTML = `
-          <div class="navnit-ai-msg-bubble">
-            <p>${text.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
-          </div>
+          <div class="navnit-ai-msg-bubble"><p>${text.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p></div>
         `;
       }
 
@@ -345,7 +389,7 @@
       if (el) el.remove();
     }
 
-    // Short & Crisp Reply Handler
+    // High Speed Intelligent Handler
     async function handleUserSend(rawText) {
       const message = rawText || inputEl.value.trim();
       if (!message) return;
@@ -353,65 +397,53 @@
       inputEl.value = '';
       appendMessage('user', message);
 
+      // Check instant match first (0ms latency, always 100% accurate)
+      const instantReply = getInstantAnswer(message);
+      if (instantReply) {
+        appendMessage('assistant', instantReply);
+        return;
+      }
+
       inputEl.disabled = true;
       sendBtn.disabled = true;
       showTypingIndicator();
 
       try {
-        const systemInstruction = `You are Navnit AI, personal assistant for Navnit Maurya.
-Navnit is a BCA student & Full-Stack Web Developer, UI/UX Designer, and AI Creator.
-Skills: HTML, CSS, JavaScript, React, Node.js, Python, Cyber Bug Hunting, Photo/Video editing.
-GitHub: https://github.com/mrnavnit01
-
-IMPORTANT RULES:
-1. Keep replies VERY SHORT, PRECISE, and TO-THE-POINT (maximum 2 to 3 lines or 3 small bullet points).
-2. DO NOT write long paragraphs or repetitive sentences.
-3. Be friendly and use relevant emojis. Answer directly without fluff.`;
-
-        const messages = [
-          { role: "system", content: systemInstruction }
-        ];
-
-        const recentHistory = chatHistory.slice(-4);
-        for (const item of recentHistory) {
-          messages.push({
-            role: item.role === 'assistant' ? 'assistant' : 'user',
-            content: item.content
-          });
-        }
-        messages.push({ role: "user", content: message });
+        const systemPrompt = `You are Navnit AI, exclusive assistant for Navnit Maurya's portfolio.
+Information about Navnit:
+• Full Name: Navnit Maurya (Digital Creator, Full-Stack Developer, Bug Hunter)
+• Education: BCA 2nd Year, VBSPU
+• Instagram: https://instagram.com/mr.navnit.01 (@mr.navnit.01)
+• GitHub: https://github.com/mrnavnit01
+• LinkedIn: https://linkedin.com/in/mrnavnit01
+• Email: navnitmaurya60@gmail.com
+• Live Projects: Navnit Tools Suite, BCA Hub, AI Bg Remover, 60FPS Portfolio
+Rule: Always provide concise, friendly, 2-line answers with emojis and verified links. Always share his Instagram or GitHub when asked!`;
 
         const response = await fetch("https://text.pollinations.ai/", {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            messages: messages,
-            model: "openai"
+            messages: [
+              { role: "system", content: systemPrompt },
+              { role: "user", content: message }
+            ],
+            model: "mistral"
           })
         });
 
         removeTypingIndicator();
 
         if (response.ok) {
-          const replyText = await response.text();
-          if (replyText && replyText.trim()) {
-            appendMessage('assistant', replyText.trim());
-          } else {
-            appendMessage('assistant', "Navnit Maurya is a Full-Stack Web Developer & UI Designer. Explore his projects on this page! 🚀");
-          }
+          const reply = await response.text();
+          appendMessage('assistant', reply.trim());
         } else {
-          appendMessage('assistant', "Navnit AI is ready! Feel free to ask about his skills or projects! ✨");
+          appendMessage('assistant', `Navnit Maurya is a Digital Creator & Developer! Connect with him on Instagram: [${NAVNIT_DATA.instagram.handle}](${NAVNIT_DATA.instagram.url}) ✨`);
         }
 
       } catch (err) {
         removeTypingIndicator();
-        console.error("AI Error:", err);
-        appendMessage(
-          'assistant',
-          "Connection issue. Please try again! 🌐"
-        );
+        appendMessage('assistant', `Reach out to Navnit on Instagram: [${NAVNIT_DATA.instagram.handle}](${NAVNIT_DATA.instagram.url}) or GitHub: [${NAVNIT_DATA.github.handle}](${NAVNIT_DATA.github.url})! 🚀`);
       } finally {
         inputEl.disabled = false;
         sendBtn.disabled = false;
