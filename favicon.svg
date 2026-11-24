@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141622"/>
+      <stop offset="50%" stop-color="#090a10"/>
+      <stop offset="100%" stop-color="#040507"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff3b0"/>
+      <stop offset="35%" stop-color="#e5c158"/>
+      <stop offset="70%" stop-color="#d4af37"/>
+      <stop offset="100%" stop-color="#997718"/>
+    </linearGradient>
+    <linearGradient id="borderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e5c158"/>
+      <stop offset="50%" stop-color="rgba(229, 193, 88, 0.3)"/>
+      <stop offset="100%" stop-color="#e5c158"/>
+    </linearGradient>
+    <filter id="goldGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Modern Rounded Icon Base (Like ChatGPT / Apple app icons) -->
+  <rect x="16" y="16" width="480" height="480" rx="112" fill="url(#bgGrad)" stroke="url(#borderGrad)" stroke-width="12"/>
+
+  <!-- Subtle Inner Luxury Ring -->
+  <circle cx="256" cy="256" r="210" fill="none" stroke="rgba(229, 193, 88, 0.12)" stroke-width="2" stroke-dasharray="8 6"/>
+
+  <!-- Brand Signature "NM" Monogram in Bold Serif Typography -->
+  <text x="256" y="325"
+        text-anchor="middle"
+        font-family="'Cinzel', 'Times New Roman', 'Georgia', serif"
+        font-weight="900"
+        font-size="210"
+        letter-spacing="4"
+        fill="url(#goldGrad)"
+        filter="url(#goldGlow)">NM</text>
+</svg>
